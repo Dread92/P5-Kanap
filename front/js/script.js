@@ -3,16 +3,22 @@ fetch ("http://localhost:3000/api/products")
 .then((data) => getProduct(data))
 
 
-
 function getProduct(dataproduct){
-const imageUrl =dataproduct[1].imageUrl
-const anchor = document.createElement("a");
-anchor.href = "http://localhost:3000/images/kanap02.jpeg"
-anchor.text ="un super canap"
-const items=  document.querySelector("#items")
+const imageUrl =dataproduct[0].imageUrl
+const anchor = makeAnchor(imageUrl);
+appendChildren(anchor)
+}
+
+function makeAnchor(url){
+    const anchor = document.createElement("a");
+    anchor.href = url
+    anchor.text ="Kanap test"
+    return anchor
+}
+
+function appendChildren(anchor){
+    const items=  document.querySelector("#items")
+    if(items!=null){
     items.appendChild(anchor)
-    }
-
-
-
-
+    }   
+}
