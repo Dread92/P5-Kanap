@@ -11,11 +11,33 @@ fetch("http://localhost:3000/api/products")
     .catch(function (erreur) {
       console.log("Message d'erreur : \n" + erreur);
     });
+
+
+    function showProducts(datas) {
+      
+      const imageUrl = datas[0].imageUrl
+      const link = document.createElement('a')
+      link.href = imageUrl
+      link.text = "un super canap"
+
+      const items =  document.querySelector("#items")
+
+      if (items != null) {
+        items.appendChild(link)
+      }
+    }
+
+
+
+
+ 
+      
+      
 	
-	
+	/*
 	
 	function showProducts(datas) {
-	
+
 		if(!datas) return;
 
 	  for (let i = 0; i < datas.length; i = i + 1) {
@@ -25,6 +47,9 @@ fetch("http://localhost:3000/api/products")
 		
 		console.log( product );
 		
+    const link = document.createElement("a")
+    link.href = datas
+    link.text = "un super canap"
 
 	   }
 	
