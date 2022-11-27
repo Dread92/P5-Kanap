@@ -13,16 +13,29 @@ fetch("http://localhost:3000/api/products")
       console.log("Message d'erreur : \n" + erreur);
     });
 
-
+    /* altTxt: "Photo d'un canapé bleu, deux places"
+colors:(3) ['Blue', 'White', 'Black']
+description:"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+imageUrl:"http://localhost:3000/images/kanap01.jpeg"
+name:"Kanap Sinopé"
+price :1849
+_id:"107fb5b75607497b96722bda5b504926" */
 
 /* Fonctions pour récupérer l'id de l'article + création d'un lien qui renvoie vers la page produit .. */
     function showProducts(datas) {
 
       const itemid = datas[0]._itemid
+      const imageUrl = datas[0].imageUrl
+      const altTxt = datas[0].altTxt
+      const image = createImage(imageUrl, altTxt)
       const link = makeLink (itemid)
-      appendChildren(link)
+      const article = createArticle()
+      article.appendChild(image)
+      appendChildren(link, article)
    
     }
+
+
 
     function makeLink (id) {
 
@@ -32,31 +45,53 @@ fetch("http://localhost:3000/api/products")
 
     }
 
-      function appendChildren(link) {
+      function appendChildren(link, article) {
 
         const items =  document.querySelector("#items")
         if (items != null) {
           items.appendChild(link)
+          link.appendChild(article)
         }
 
       }
+
+
+
       /* fabrication de la carte image+ titre + paragraphe */
 
 
       function createArticle(){
 
+        const article = document.createElement('article')
+        const image = createImage()
+        const title = createTitle()
+        const paragraph = createParagraph()
+       
+        article.appendChild(image)
+        /*  article.appendChild(title)
+        article.appendChild(paragraph) */
+        console.log(article)
+
+        return article 
       }
       
-      function createImage() {
-
+      function createImage ( imageUrl, altTxt) {
+        const image = document.createElement("img")
+        image.src = imageUrl 
+        image.alt = altTxt
+        return image
       }
 
+
+      
       function createTitle() {
 
       }
 
+
+
       function createParagraph(){
-        
+
       }
 	
 
