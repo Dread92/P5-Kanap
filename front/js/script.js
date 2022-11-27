@@ -4,7 +4,8 @@ fetch("http://localhost:3000/api/products")
         return reponse.json(); 
       }
     })
-    .then(function (datas) {   
+    .then(function (datas) { 
+      console.log(datas)  
       showProducts(datas); 
      
   })
@@ -13,27 +14,76 @@ fetch("http://localhost:3000/api/products")
     });
 
 
+
+/* Fonctions pour récupérer l'id de l'article + création d'un lien qui renvoie vers la page produit .. */
     function showProducts(datas) {
-      
-      const imageUrl = datas[0].imageUrl
-      const link = document.createElement('a')
-      link.href = imageUrl
-      link.text = "un super canap"
 
-      const items =  document.querySelector("#items")
-
-      if (items != null) {
-        items.appendChild(link)
-      }
+      const itemid = datas[0]._itemid
+      const link = makeLink (itemid)
+      appendChildren(link)
+   
     }
 
+    function makeLink (id) {
+
+      const link = document.createElement('a')
+      link.href = "./product.html?id=" + id
+      return link
+
+    }
+
+      function appendChildren(link) {
+
+        const items =  document.querySelector("#items")
+        if (items != null) {
+          items.appendChild(link)
+        }
+
+      }
+      /* fabrication de la carte image+ titre + paragraphe */
 
 
+      function createArticle(){
 
- 
+      }
       
-      
+      function createImage() {
+
+      }
+
+      function createTitle() {
+
+      }
+
+      function createParagraph(){
+        
+      }
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*
 	
 	function showProducts(datas) {
