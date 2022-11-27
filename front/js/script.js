@@ -27,10 +27,19 @@ _id:"107fb5b75607497b96722bda5b504926" */
       const itemid = datas[0]._itemid
       const imageUrl = datas[0].imageUrl
       const altTxt = datas[0].altTxt
+      const name = datas[0].name
+      const description = datas[0].description
+
+
       const image = createImage(imageUrl, altTxt)
       const link = makeLink (itemid)
       const article = createArticle()
+      const h3 = createTitle (name)
+      const p = createParagraph(description)
+
       article.appendChild(image)
+      article.appendChild(h3)
+      article.appendChild(p)
       appendChildren(link, article)
    
     }
@@ -58,40 +67,44 @@ _id:"107fb5b75607497b96722bda5b504926" */
 
 
       /* fabrication de la carte image+ titre + paragraphe */
+      function createImage ( imageUrl, altTxt) {
+        const image = document.createElement("img")
+        image.src = imageUrl 
+        image.alt = altTxt
+        image.removeAttribute ("title")
+        image.removeAttribute ("style")
+        return image
+      }
 
 
       function createArticle(){
 
+      
+
         const article = document.createElement('article')
-        const image = createImage()
-        const title = createTitle()
-        const paragraph = createParagraph()
        
-        article.appendChild(image)
-        /*  article.appendChild(title)
-        article.appendChild(paragraph) */
         console.log(article)
 
         return article 
       }
       
-      function createImage ( imageUrl, altTxt) {
-        const image = document.createElement("img")
-        image.src = imageUrl 
-        image.alt = altTxt
-        return image
-      }
 
 
       
-      function createTitle() {
-
+      function createTitle(name) {
+        const h3 =  document.createElement("h3")
+        h3.textContent = name 
+        h3.classList.add('productname')
+        return h3
       }
 
 
 
-      function createParagraph(){
-
+      function createParagraph(description){
+        const p = document.createElement('p')
+        p.textContent = description
+        p.classList.add("productDescription")
+        return p
       }
 	
 
