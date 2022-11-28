@@ -5,13 +5,13 @@ fetch("http://localhost:3000/api/products")
       }
     })
     .then(function (datas) { 
-      console.log(datas)  
       showProducts(datas); 
      
   })
     .catch(function (erreur) {
       console.log("Message d'erreur : \n" + erreur);
     });
+    	
 
     /* altTxt: "Photo d'un canapé bleu, deux places"
 colors:(3) ['Blue', 'White', 'Black']
@@ -24,25 +24,31 @@ _id:"107fb5b75607497b96722bda5b504926" */
 /* Fonctions pour récupérer l'id de l'article + création d'un lien qui renvoie vers la page produit .. */
     function showProducts(datas) {
 
-      const itemid = datas[0]._itemid
-      const imageUrl = datas[0].imageUrl
-      const altTxt = datas[0].altTxt
-      const name = datas[0].name
-      const description = datas[0].description
+      if(!datas) return;
+      for (let i = 0; i < datas.length; i++){ /*loop pour prendre chaque produit , accolade englobant toutes les constantes */
 
+      const itemid = datas[i]._itemid
+      const imageUrl = datas[i].imageUrl
+      const altTxt = datas[i].altTxt
+      const name = datas[i].name
+      const description = datas[i].description
+      /* const {itemid, imageUrl, altTxt, name, description} = data[0]     --> destructuring */
 
-      const image = createImage(imageUrl, altTxt)
+   
       const link = makeLink (itemid)
-      const article = createArticle()
+
+      const article = document.createElement('article') /* la fonction make article n'avait qu'une ligne */
+      const image = createImage(imageUrl, altTxt)
       const h3 = createTitle (name)
       const p = createParagraph(description)
 
       article.appendChild(image)
       article.appendChild(h3)
       article.appendChild(p)
-      appendChildren(link, article)
-   
+      appendArticleToLink(link, article)
     }
+
+  }
 
 
 
@@ -54,7 +60,7 @@ _id:"107fb5b75607497b96722bda5b504926" */
 
     }
 
-      function appendChildren(link, article) {
+      function appendArticleToLink(link, article) {
 
         const items =  document.querySelector("#items")
         if (items != null) {
@@ -64,6 +70,7 @@ _id:"107fb5b75607497b96722bda5b504926" */
 
       }
 
+   
 
 
       /* fabrication de la carte image+ titre + paragraphe */
@@ -71,23 +78,8 @@ _id:"107fb5b75607497b96722bda5b504926" */
         const image = document.createElement("img")
         image.src = imageUrl 
         image.alt = altTxt
-        image.removeAttribute ("title")
-        image.removeAttribute ("style")
         return image
       }
-
-
-      function createArticle(){
-
-      
-
-        const article = document.createElement('article')
-       
-        console.log(article)
-
-        return article 
-      }
-      
 
 
       
@@ -131,29 +123,23 @@ _id:"107fb5b75607497b96722bda5b504926" */
 
 
 
+/*
+      function showProducts(datas) {
 
-	/*
-	
-	function showProducts(datas) {
+        if(!datas) return;
+    
+        for (let i = 0; i < datas.length; i = i + 1) {
+    
+        
+        let product = datas[i];
+        
+        console.log( product );
+      
+    
+         }
 
-		if(!datas) return;
+/*
 
-	  for (let i = 0; i < datas.length; i = i + 1) {
-
-		
-		let product = datas[i];
-		
-		console.log( product );
-		
-    const link = document.createElement("a")
-    link.href = datas
-    link.text = "un super canap"
-
-	   }
-	
-	}
-
- /*
 fetch ("http://localhost:3000/api/products")
 .then((res) => res.json())
 .then((data) => getProduct(data))
@@ -164,7 +150,7 @@ console.log(dataproduct)
 
 const imageUrl =dataproduct[0].imageUrl
 const anchor = makeAnchor(imageUrl);
-appendChildren(anchor)
+appendArticleToLink(anchor)
 }
 
 
@@ -176,7 +162,7 @@ function makeAnchor(url){
     return anchor
 }
 
-function appendChildren(anchor){
+function appendArticleToLink(anchor){
     const items=  document.querySelector("#items")
     if(items!=null){
     items.appendChild(anchor)
