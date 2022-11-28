@@ -27,24 +27,27 @@ _id:"107fb5b75607497b96722bda5b504926" */
       if(!datas) return;
       for (let i = 0; i < datas.length; i++){ /*loop pour prendre chaque produit , accolade englobant toutes les constantes */
 
-      const itemid = datas[i]._itemid
+      const id = datas[i]._id
       const imageUrl = datas[i].imageUrl
       const altTxt = datas[i].altTxt
       const name = datas[i].name
       const description = datas[i].description
-      /* const {itemid, imageUrl, altTxt, name, description} = data[0]     --> destructuring */
+      /* const {_id, imageUrl, altTxt, name, description} = data[i]     --> destructuring */
 
    
-      const link = makeLink (itemid)
+     
 
+      const link = makeLink (id)
       const article = document.createElement('article') /* la fonction make article n'avait qu'une ligne */
       const image = createImage(imageUrl, altTxt)
       const h3 = createTitle (name)
       const p = createParagraph(description)
 
+      /* création d'enfants à <article> */
       article.appendChild(image)
       article.appendChild(h3)
       article.appendChild(p)
+
       appendArticleToLink(link, article)
     }
 
@@ -93,6 +96,8 @@ _id:"107fb5b75607497b96722bda5b504926" */
         return p
       }
 	
+
+
 
 
 
