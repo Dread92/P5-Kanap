@@ -71,8 +71,6 @@ _id:"107fb5b75607497b96722bda5b504926" */
       }
 
    
-
-
       /* fabrication de la carte image+ titre + paragraphe */
       function createImage ( imageUrl, altTxt) {
         const image = document.createElement("img")
@@ -81,16 +79,12 @@ _id:"107fb5b75607497b96722bda5b504926" */
         return image
       }
 
-
-      
       function createTitle(name) {
         const h3 =  document.createElement("h3")
         h3.textContent = name 
         h3.classList.add('productname')
         return h3
       }
-
-
 
       function createParagraph(description){
         const p = document.createElement('p')
@@ -116,56 +110,3 @@ _id:"107fb5b75607497b96722bda5b504926" */
 
 
 
-
-
-
-
-
-
-
-/*
-      function showProducts(datas) {
-
-        if(!datas) return;
-    
-        for (let i = 0; i < datas.length; i = i + 1) {
-    
-        
-        let product = datas[i];
-        
-        console.log( product );
-      
-    
-         }
-
-/*
-
-fetch ("http://localhost:3000/api/products")
-.then((res) => res.json())
-.then((data) => getProduct(data))
-
-
-function getProduct(dataproduct){
-console.log(dataproduct)
-
-const imageUrl =dataproduct[0].imageUrl
-const anchor = makeAnchor(imageUrl);
-appendArticleToLink(anchor)
-}
-
-
-
-function makeAnchor(url){
-    const anchor = document.createElement("a");
-    anchor.href = url
-    anchor.text ="Kanap test"
-    return anchor
-}
-
-function appendArticleToLink(anchor){
-    const items=  document.querySelector("#items")
-    if(items!=null){
-    items.appendChild(anchor)
-    }   
-}
-*/
