@@ -1,5 +1,8 @@
 
-/* URLparams */ 
+/* URLparams */
+
+
+ 
 /* window.location.href 
     window.location.search
 */ 
@@ -8,9 +11,54 @@ const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryStrin
 const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
 console.log(id)
 
+
 fetch(`http://localhost:3000/api/products/${id}`)
-.then ((response)=> response.json ())
-.then ((res) => console.log(res))
+.then(function (reponse) {
+    if (reponse.ok) {
+      return reponse.json(); 
+    }
+  })
+  .then(function (id) { 
+    dataFlow(id); })
+
+
+function dataFlow(sofa) {
+    const altTxt= sofa.altTxt
+    const colors = sofa.colors
+    const description = sofa.description
+    const imageUrl = sofa.imageUrl
+    const name = sofa.name
+    const price = sofa.price
+    const _id = sofa._id 
+
+
+
+    createImage( imageUrl, altTxt)
+    createTitle ( name )
+
+}
+
+    function createImage(imageUrl, altTxt){
+        const image = document.createElement ( 'img')
+        image.src = imageUrl
+        image.alt = altTxt
+        const parent = document.querySelector(".item__img")
+        if (parent != null) parent.appendChild (image)
+    }
+
+    function createTitle (name) {
+        const h1 = document.querySelector ("#title")
+        if (h1 != null) h1.textContent = name 
+    }
+
+
+
+
+
+
+
+
+
 
 
 
