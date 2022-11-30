@@ -35,6 +35,7 @@ function dataFlow(sofa) {
 
     createImage( imageUrl, altTxt)
     createTitle ( name )
+    createPrice (price)
 
 }
 
@@ -50,6 +51,12 @@ function dataFlow(sofa) {
         const h1 = document.querySelector ("#title")
         if (h1 != null) h1.textContent = name 
     }
+
+    function createPrice ( price ) {
+        const span = document.querySelector ("#price")
+        if (span != null) span.textContent= price 
+    }
+
 
 
 
