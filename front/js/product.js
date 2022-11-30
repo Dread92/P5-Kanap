@@ -23,13 +23,14 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 
 function dataFlow(sofa) {
+
+
     const altTxt= sofa.altTxt
     const colors = sofa.colors
     const description = sofa.description
     const imageUrl = sofa.imageUrl
     const name = sofa.name
     const price = sofa.price
-    const _id = sofa._id 
 
 
 
@@ -37,6 +38,7 @@ function dataFlow(sofa) {
     createTitle ( name )
     createPrice (price)
     createDescription ( description)
+    createColors ( colors)
 
 }
 
@@ -61,6 +63,20 @@ function dataFlow(sofa) {
     function createDescription ( description) {
         const p = document.querySelector ("#description")
         if ( p != null ) p.textContent = description 
+    }
+
+    function createColors ( colors) {
+        const select = document.querySelector ("#colors")
+        if ( select != null ) {
+
+            colors.forEach((colors) => {
+                const option = document.createElement('option')
+                option.value = colors
+                option.textContent = colors
+                select.appendChild (option)
+            });
+            
+        }
     }
 
 
