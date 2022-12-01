@@ -2,6 +2,7 @@
 /* URLparams */
 
 
+
  
 /* window.location.href 
     window.location.search
@@ -74,7 +75,8 @@ function dataFlow(sofa) {
                 option.value = colors
                 option.textContent = colors
                 select.appendChild (option)
-            });
+
+            })
             
         }
     }
@@ -87,16 +89,3 @@ function dataFlow(sofa) {
 
 
 
-
-
-/*
-fetch(`http://localhost:3000/api/products/${id}`)
-.then(function (reponse) {
-    if (reponse.ok) {
-      return reponse.json(); 
-    }
-  })
-  .then(function (id) { 
-    monParametre(id); 
-   
-})*/
