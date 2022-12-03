@@ -1,9 +1,5 @@
 
 /* URLparams */
-
-
-
- 
 /* window.location.href 
     window.location.search
 */ 
@@ -11,6 +7,7 @@ const queryString = window.location.search
 const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryString' de l'URL
 const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
 console.log(id)
+
 
 
 fetch(`http://localhost:3000/api/products/${id}`)
@@ -80,6 +77,22 @@ function dataFlow(sofa) {
             
         }
     }
+
+    
+    const button= document.querySelector ( '#addToCart')
+    if (button != null) {
+        button.addEventListener("click", (e) => {
+            const colors = document.querySelector('colors').value
+            const quantity = document.querySelector("#quantity").value
+            if (colors == null || colors == ""|| quantity == null || quantity == 0){
+
+                (alert ("Sélectionnez une couleur et une quantité"))
+                
+            }
+        })
+    }
+
+
 
 
 
