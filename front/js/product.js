@@ -82,7 +82,7 @@ function dataFlow(sofa) {
     const button= document.querySelector ( '#addToCart')
     if (button != null) {
         button.addEventListener("click", (e) => {
-            const colors = document.querySelector('colors').value
+            const colors = document.querySelector('#colors').value
             const quantity = document.querySelector("#quantity").value
             if (colors == null || colors == ""|| quantity == null || quantity == 0){
 
