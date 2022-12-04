@@ -101,14 +101,14 @@ function dataFlow(sofa) {
 
 
             
-/* local storage */
+
            saveOrder(colors, quantity)
           
 
         })
     }
 
-    
+    /* local storage */
     function saveOrder(id) {
         const key = `${id}`
         const data = {
@@ -124,8 +124,6 @@ function redirectToCart (){
             /*redirect to html file */
             window.location.href = "cart.html"
 }
-
-
 
 
 
