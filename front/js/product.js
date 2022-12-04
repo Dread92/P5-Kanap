@@ -6,7 +6,11 @@
 const queryString = window.location.search
 const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryString' de l'URL
 const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
-console.log(id)
+if (id !=null){
+    let sofaPrice = 0
+
+}
+
 
 
 
@@ -22,7 +26,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 function dataFlow(sofa) {
 
-
+   
     const altTxt= sofa.altTxt
     const colors = sofa.colors
     const description = sofa.description
@@ -30,7 +34,7 @@ function dataFlow(sofa) {
     const name = sofa.name
     const price = sofa.price
 
-
+    sofaPrice = price;
 
     createImage( imageUrl, altTxt)
     createTitle ( name )
@@ -77,7 +81,7 @@ function dataFlow(sofa) {
             
         }
     }
-
+      
     
     const button= document.querySelector ( '#addToCart')
     if (button != null) {
@@ -86,13 +90,26 @@ function dataFlow(sofa) {
             const quantity = document.querySelector("#quantity").value
             if (colors == null || colors == ""|| quantity == null || quantity == 0){
 
-                (alert ("Sélectionnez une couleur et une quantité"))
-                
+                (alert ("Sélectionnez une couleur et une quantité"))         
             }
+
+
+
+/* local storage */
+            const data = {
+                id : id,
+                colors:colors,
+                price:sofaPrice,
+                quantity:Number ( quantity)
+            }
+            localStorage.setItem(id,JSON.stringify(data))
+
+
+
         })
     }
 
-
+    
 
 
 
