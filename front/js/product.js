@@ -82,7 +82,7 @@ function dataFlow(sofa) {
         }
     }
       
-    
+    /* add to cart button + values */
     const button= document.querySelector ( '#addToCart')
     if (button != null) {
         button.addEventListener("click", (e) => {
@@ -104,7 +104,8 @@ function dataFlow(sofa) {
             }
             localStorage.setItem(id,JSON.stringify(data))
 
-
+            /*redirect to html file */
+            window.location.href = "cart.html"
 
         })
     }
