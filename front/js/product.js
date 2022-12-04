@@ -8,6 +8,7 @@ const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryStrin
 const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
 if (id !=null){
     let sofaPrice = 0
+    let imagUrl, altText
 
 }
 
@@ -35,6 +36,8 @@ function dataFlow(sofa) {
     const price = sofa.price
 
     sofaPrice = price;
+    imagUrl= imageUrl;
+    altText = altTxt;
 
     createImage( imageUrl, altTxt)
     createTitle ( name )
@@ -88,30 +91,39 @@ function dataFlow(sofa) {
         button.addEventListener("click", (e) => {
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector("#quantity").value
+
+            /* if cart is invalid, alert ! */
             if (colors == null || colors == ""|| quantity == null || quantity == 0){
 
-                (alert ("Sélectionnez une couleur et une quantité"))         
+                (alert ("Sélectionnez une couleur et une quantité"))  
+                
+                return
             }
 
 
-
+            
 /* local storage */
-            const data = {
-                id : id,
-                colors:colors,
-                price:sofaPrice,
-                quantity:Number ( quantity)
-            }
-            localStorage.setItem(id,JSON.stringify(data))
-
-            /*redirect to html file */
+            registerCart(colors, quantity)
+          
+            localStorage.setItem(id,JSON.stringify(data))  
+            /*redirect to html file if order is valid */
             window.location.href = "cart.html"
 
         })
     }
 
     
+    function registerCart(colors, quantity){
+        const data = {
+            id : id,
+            colors:colors,
+            price:sofaPrice,
+            quantity:Number ( quantity),
+            imageUrl: imagUrl,
+            altTxt: altText,
 
+        }
+    }
 
 
 
