@@ -91,38 +91,39 @@ function dataFlow(sofa) {
         button.addEventListener("click", (e) => {
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector("#quantity").value
+            if (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
+              
 
-            /* if cart is invalid, alert ! */
-            if (colors == null || colors == ""|| quantity == null || quantity == 0){
-
-                (alert ("Sélectionnez une couleur et une quantité"))  
+                (alert ("Sélectionnez une couleur et une quantité, la quantité doit être comprise entre 1 et 100"))  
                 
                 return
             }
+
+
+            
 /* local storage */
-            registerCart(colors, quantity)
+           saveOrder(colors, quantity)
           
-            localStorage.setItem(id,JSON.stringify(data))  
-            /*redirect to html file if order is valid */
-            window.location.href = "cart.html"
 
         })
     }
 
     
-    function registerCart(colors, quantity){
+    function saveOrder(id) {
+        const key = `${id}`
         const data = {
-            id : id,
-            colors:colors,
-            price:sofaPrice,
-            quantity:Number ( quantity),
-            imageUrl: imagUrl,
-            altTxt: altText,
-
+          id: id,
+          colors: colors,
+          quantity: Number(quantity),
+          
         }
-    }
+        localStorage.setItem(key, JSON.stringify(data))
+      }
 
-
+function redirectToCart (){
+            /*redirect to html file */
+            window.location.href = "cart.html"
+}
 
 
 
