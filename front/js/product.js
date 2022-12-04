@@ -99,9 +99,6 @@ function dataFlow(sofa) {
                 
                 return
             }
-
-
-            
 /* local storage */
             registerCart(colors, quantity)
           
