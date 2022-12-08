@@ -25,7 +25,11 @@ function dataFlow(sofa) {
     const imageUrl = sofa.imageUrl
     const name = sofa.name
     const price = sofa.price
+
+
     sofaPrice = price;
+
+
     createImage( imageUrl, altTxt)
     createTitle ( name )
     createPrice (price)
@@ -71,22 +75,23 @@ function dataFlow(sofa) {
         button.addEventListener("click", (e) => {
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector("#quantity").value
-            if (colors == null || colors == ""|| quantity == null || quantity == 0){
-                (alert ("Sélectionnez une couleur et une quantité"))         
+            if (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
+                (alert ("Sélectionnez une couleur et une quantité"))    
+                return     
             }
 
-
+ 
+            let cart = [id, colors, quantity];
       
 /* local storage */
-            const data = {
+            const item = {
                 id : id,
                 colors:colors,
-                price:sofaPrice,
                 quantity:Number ( quantity)
             }
-            localStorage.setItem(id,JSON.stringify(data))
+            localStorage.setItem('cart',JSON.stringify(cart)) 
 
-
+            cart.push(item);
             /*redirect to html file */
             window.location.href = "cart.html"
 
