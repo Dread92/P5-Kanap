@@ -79,21 +79,20 @@ function dataFlow(sofa) {
                 (alert ("Sélectionnez une couleur et une quantité"))    
                 return     
             }
-
- 
-            let cart = [id, colors, quantity];
-      
 /* local storage */
-            const item = {
-                id : id,
+            const item = [
+                {
+                id:id,
                 colors:colors,
                 quantity:Number ( quantity)
             }
-            localStorage.setItem('cart',JSON.stringify(cart)) 
-
+            ]
+            localStorage.setItem('cart',JSON.stringify(item)) 
             cart.push(item);
             /*redirect to html file */
-            window.location.href = "cart.html"
-
+         window.location.href = "cart.html"
         })
+         
     }
+
+        
