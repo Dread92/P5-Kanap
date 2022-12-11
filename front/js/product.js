@@ -45,7 +45,7 @@ function dataFlow(sofa) {
     }
     function createTitle (name) {
         const h1 = document.querySelector ("#title")
-        if (h1 != null) h1.textContent = name 
+        if (h1 != null) h1.textContent = name   
     }
     function createPrice ( price ) {
         const span = document.querySelector ("#price")
@@ -69,30 +69,40 @@ function dataFlow(sofa) {
     }
 
 
-    /* add to cart button + values */
+
     const button= document.querySelector ( '#addToCart')
-    if (button != null) {
-        button.addEventListener("click", (e) => {
+    button.addEventListener("click", registerclick)
+
+        function registerclick(){
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector("#quantity").value
-            if (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
-                (alert ("Sélectionnez une couleur et une quantité"))    
-                return     
-            }
-/* local storage */
-            const item = [
-                {
+
+            if (orderIncorrect(colors, quantity)) 
+            return
+            registerCart(colors, quantity)
+            redirectToCart()
+        }
+
+        function registerCart(colors, quantity) {
+           
+            const item=[{
                 id:id,
                 colors:colors,
                 quantity:Number ( quantity)
-            }
-            ]
+            }] 
             localStorage.setItem('cart',JSON.stringify(item)) 
-            cart.push(item);
-            /*redirect to html file */
-         window.location.href = "cart.html"
-        })
-         
-    }
+          
+        }
 
+        function orderIncorrect (colors, quantity){
         
+        if
+            (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
+                (alert ("Sélectionnez une couleur et une quantité"))    
+                return   
+        }}
+
+
+        function redirectToCart() {
+            window.location.href = "cart.html"
+          }
