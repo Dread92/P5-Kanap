@@ -85,11 +85,11 @@ function dataFlow(sofa) {
 
         function registerCart(colors, quantity) {
            
-            const item=[{
+            const item={
                 id:id,
                 colors:colors,
                 quantity:Number ( quantity)
-            }] 
+            }
             localStorage.setItem('cart',JSON.stringify(item)) 
           
         }
