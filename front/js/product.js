@@ -37,6 +37,7 @@ function dataFlow(sofa) {
     imgUrl= imageUrl;
     altText=altTxt;
     articleName=name;
+  
 
 
 

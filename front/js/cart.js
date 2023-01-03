@@ -34,6 +34,10 @@ for (let i=0 ; i < numberOfProducts; i++){
 }
 }
 
+
+
+
+
 function displayItem (item){
 
 
@@ -51,11 +55,15 @@ function displayItem (item){
     article.appendChild(cardContent)
 }
 
+
+
+
+
 function createCardContent(item){
 
 
     const div = document.createElement("div")
-    div.classList.add("cart__item__content")
+    div.classList.add("card__item__content")
     
     const description= document.createElement("div")
     description.classList.add("cart__item__content__description")
@@ -64,16 +72,17 @@ function createCardContent(item){
     h2.textContent = item.name
 
 
-    const p = document.createElement("p")
-    p.textcontent = item.colors
+    const pColor = document.createElement("p")
+    pColor.textcontent = item.colors
 
-    const p2 = document.createElement("p")
-    p2.textContent = item.price + "€";
+    const pPrice = document.createElement("p")
+    pPrice.textContent = item.price + "€"
 
 
     description.appendChild(h2)
-    description.appendChild(p)
-    description.appendChild(p2)
+    description.appendChild(pColor)
+    description.appendChild(pPrice)
+
     div.appendChild(description)
 
     return div
