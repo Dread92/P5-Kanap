@@ -101,7 +101,7 @@ function dataFlow(sofa) {
                 altTxt : altText,
                 price:sofaPrice
             }
-            localStorage.setItem('cart',JSON.stringify(item)) 
+            localStorage.setItem(id,JSON.stringify(item)) 
           
         }
 
