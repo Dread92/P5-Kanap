@@ -26,7 +26,7 @@ function getStorage(){
 for (let i=0 ; i < numberOfProducts; i++){
 
 
-    const item=localStorage.getItem(localStorage.key(i))
+    const item=localStorage.getItem(localStorage.key(i)) ||""
     const itemProduct = JSON.parse(item)
     cart.push(itemProduct)
 
@@ -42,28 +42,74 @@ function displayItem (item){
 
 
     const article = createArticle(item)
-    displayArticle(article)
+    
 
 
     
-    const div = createImageInDiv (item)
-    article.appendChild(div)
+    const imageDiv = createImageInDiv (item)
+    article.appendChild(imageDiv)
 
 
 
-    const cardContent = createCardContent(item)
-    article.appendChild(cardContent)
+    const cardItemContent= createCartContent(item)
+    article.appendChild(cardItemContent)
+
+
+
+    displayArticle(article)
 }
 
 
 
 
 
-function createCardContent(item){
+function createCartContent(item){
+
+   const cardItemContent = document.createElement('div')
+   cardItemContent.classList.add("cart__item__content")
 
 
-    const div = document.createElement("div")
-    div.classList.add("card__item__content")
+   const description = createDescription(item)
+    const settings = createSettings(item)
+
+    cardItemContent.appendChild(description)
+    cardItemContent.appendChild(settings)
+    return cardItemContent
+    
+    
+
+
+}
+
+function createSettings(item){
+    const settings= document.createElement("div")
+    settings.classList.add("cart__item__settings")
+
+    addQuantitySettings(settings, item)
+    return settings
+}
+
+function addQuantitySettings(settings, item){
+    const quantity = document.createElement("div")
+    quantity.classList.add("cart__item__content__settings__quantity")
+    const p = document.createElement("p")
+    p.textContent = " Qté :"
+    quantity.appendChild(p)
+
+    const input = document.createElement("input")
+    input.type = "number"
+    input.classList.add("itemQuantity")
+    input.name = "itemQuantity"
+    input.min="1"
+    input.max="100"
+    input.value = item.quantity
+
+    settings.appendChild(input)
+
+}
+
+function createDescription (item) {
+
     
     const description= document.createElement("div")
     description.classList.add("cart__item__content__description")
@@ -83,10 +129,9 @@ function createCardContent(item){
     description.appendChild(pColor)
     description.appendChild(pPrice)
 
-    div.appendChild(description)
+    return description
 
-    return div
-
+  
 
 }
 
