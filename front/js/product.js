@@ -8,7 +8,7 @@ const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryStrin
 const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
 if (id !=null) {
     let price= 0
-    let imgUrl, altText
+    let imgUrl, altText, articleName
 }
 
 fetch(`http://localhost:3000/api/products/${id}`)
@@ -36,6 +36,7 @@ function dataFlow(sofa) {
     sofaPrice = price;
     imgUrl= imageUrl;
     altText=altTxt;
+    articleName=name;
 
 
 
@@ -99,7 +100,8 @@ function dataFlow(sofa) {
                 quantity:Number ( quantity),
                 imageUrl: imgUrl,
                 altTxt : altText,
-                price:sofaPrice
+                price:sofaPrice,
+                name:articleName,
             }
             localStorage.setItem(id,JSON.stringify(item)) 
           
