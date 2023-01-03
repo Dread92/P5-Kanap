@@ -22,10 +22,15 @@ function getStorage(){
 
     const numberOfProducts= localStorage.length;
 
+
 for (let i=0 ; i < numberOfProducts; i++){
+
+
     const item=localStorage.getItem(localStorage.key(i))
     const itemProduct = JSON.parse(item)
     cart.push(itemProduct)
+
+
 }
 }
 
@@ -40,9 +45,9 @@ function displayItem (item){
     const div = createImageInDiv (item)
     article.appendChild(div)
 
-    
 
-    const cardContent = createCardContent
+
+    const cardContent = createCardContent(item)
     article.appendChild(cardContent)
 }
 
@@ -66,7 +71,12 @@ function createCardContent(item){
     p2.textContent = item.price + "€";
 
 
-    description.appendChild(h2, p, p2)
+    description.appendChild(h2)
+    description.appendChild(p)
+    description.appendChild(p2)
+    div.appendChild(description)
+
+    return div
 
 
 }
