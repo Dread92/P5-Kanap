@@ -10,6 +10,9 @@ if (id !=null) {
     let price= 0
     let imgUrl, altText, articleName
 }
+const cart =[]
+
+
 
 fetch(`http://localhost:3000/api/products/${id}`)
 .then(function (reponse) {
@@ -104,7 +107,7 @@ function dataFlow(sofa) {
                 price:sofaPrice,
                 name:articleName,
             }
-            localStorage.setItem(id,JSON.stringify(item)) 
+            localStorage.setItem("cart",JSON.stringify(item)) /*cart*/
           
         }
 
@@ -119,3 +122,4 @@ function dataFlow(sofa) {
         function redirectToCart() {
             window.location.href = "cart.html"
           }
+          

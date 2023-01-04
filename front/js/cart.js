@@ -10,6 +10,21 @@ quantity: 2
 name: Kanap Sinopé*/
 
 
+/*let basket = JSON.parse(localStorage.getItem("cart"));
+
+
+for (let i = 0; i < basket.length; i++) {
+ 
+
+let product = basket[i];
+
+
+console.log(product);
+
+
+}}*/
+
+
 
 const cart= [];
 
@@ -109,7 +124,8 @@ function addQuantitySettings(settings, item){
 }
 
 function createDescription (item) {
-
+   /* if (!item)
+    return false */
     
     const description= document.createElement("div")
     description.classList.add("cart__item__content__description")
@@ -119,10 +135,10 @@ function createDescription (item) {
 
 
     const pColor = document.createElement("p")
-    pColor.textcontent = item.colors
-
+    pColor.innerText = item.colors
+    console.log(item.colors)
     const pPrice = document.createElement("p")
-    pPrice.textContent = item.price + "€"
+    pPrice.innerText = item.price + "€"
 
 
     description.appendChild(h2)
