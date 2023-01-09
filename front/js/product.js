@@ -102,10 +102,10 @@ function dataFlow(sofa) {
                 id:id,
                 colors:colors,
                 quantity:Number ( quantity),
-                imageUrl: imgUrl,
+                /*imageUrl: imgUrl,
                 altTxt : altText,
                 price:sofaPrice,
-                name:articleName,
+                name:articleName,*/
             }
             localStorage.setItem("cart",JSON.stringify(item)) /*cart*/
           
