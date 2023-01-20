@@ -50,6 +50,8 @@ function dataFlow(sofa) {
     createDescription ( description)
     createColors ( colors)
 }
+
+
     function createImage(imageUrl, altTxt){
         const image = document.createElement ( 'img')
         image.src = imageUrl
@@ -84,6 +86,8 @@ function dataFlow(sofa) {
 
 
 
+
+
     const button= document.querySelector ( '#addToCart')
     button.addEventListener("click", registerclick)
 
@@ -94,12 +98,20 @@ function dataFlow(sofa) {
             const quantity = document.querySelector("#quantity").value
 
             if (orderIncorrect(colors, quantity)) return
-            addToCart()
+            registerCart(colors, quantity)
             redirectToCart()
         }
 
 
 
+
+
+        function orderIncorrect (colors, quantity){
+            if
+                (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
+                    (alert ("Sélectionnez une couleur et une quantité"))    
+                   return true
+            }} 
 
 
 
@@ -161,13 +173,6 @@ function dataFlow(sofa) {
         }
 
 
-
-        function orderIncorrect (colors, quantity){
-        if
-            (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
-                (alert ("Sélectionnez une couleur et une quantité"))    
-               return true
-        }} 
 
 
         function redirectToCart() {
