@@ -87,6 +87,8 @@ function dataFlow(sofa) {
     const button= document.querySelector ( '#addToCart')
     button.addEventListener("click", registerclick)
 
+
+
         function registerclick(){
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector("#quantity").value
@@ -124,10 +126,10 @@ function dataFlow(sofa) {
 
 
 
-        
+
 
         function registerCart(colors, quantity) {
-        decodeURI
+       
             const item={
                 id:id,
                 colors:colors,
@@ -140,6 +142,32 @@ function dataFlow(sofa) {
             localStorage.setItem("cart",JSON.stringify(item)) /*cart*/
           
         }
+
+
+        function addToCart (item){
+            let cart = JSON.parse(localStorage.getItem("Cart"))
+
+            if (cart == null){
+                cart=[]
+                cart.push(item)
+                localStorage.setItem("Cart", Json.stringify(cart))
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
 
         function orderIncorrect (colors, quantity){
         if
