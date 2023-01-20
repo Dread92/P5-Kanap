@@ -94,34 +94,9 @@ function dataFlow(sofa) {
             const quantity = document.querySelector("#quantity").value
 
             if (orderIncorrect(colors, quantity)) return
-            registerCart(colors, quantity)
+            addToCart()
             redirectToCart()
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -139,8 +114,7 @@ function dataFlow(sofa) {
                 price:sofaPrice,
                 name:articleName,*/
             }
-            localStorage.setItem("cart",JSON.stringify(item)) /*cart*/
-          
+           
         }
 
 
@@ -150,7 +124,7 @@ function dataFlow(sofa) {
             if (cart == null){
                 cart=[]
                 cart.push(item)
-                localStorage.setItem("Cart", Json.stringify(cart))
+                localStorage.setItem("Cart", JSON.stringify(cart))
             }
 
             else if (cart != null){
