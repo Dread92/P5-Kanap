@@ -10,7 +10,7 @@ if (id !=null) {
     let price= 0
     let imgUrl, altText, articleName
 }
-const cart =[]
+
 
 
 
@@ -153,15 +153,34 @@ function dataFlow(sofa) {
                 localStorage.setItem("Cart", Json.stringify(cart))
             }
 
+            else if (cart != null){
+                for(i=0; i<cart.length; i++) {
+                    if(
+                        cart[i].id = item.id &&
+                        cart[i].colors==colors
+                    ){
+                        return(
+                            cart[i].quantity = Math.min(cart[i].quantity+item.quantity,100),
+                            localStorage.setItem("cart", JSON.stringify(cart))
+                        )
 
+                    }
+                }
+            }
 
+            for (i=0; i< cart.length; i++){
+                if(cart[i].id == item.ii &&
+                    cart[i].colors != colors ||
+                    cart[i].id != item.id
+                     )
+                     {
+                        return(
+                            cart.push(item),
+                            localStorage.setItem("cart", JSON.stringify(cart))
 
-
-
-
-
-
-
+                        )
+                     }
+            }
 
 
 
