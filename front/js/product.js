@@ -96,8 +96,38 @@ function dataFlow(sofa) {
             redirectToCart()
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
         function registerCart(colors, quantity) {
-           
+        decodeURI
             const item={
                 id:id,
                 colors:colors,

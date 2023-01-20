@@ -91,9 +91,6 @@ function createCartContent(item){
     cardItemContent.appendChild(settings)
     return cardItemContent
     
-    
-
-
 }
 
 function createSettings(item){
@@ -119,7 +116,7 @@ function addQuantitySettings(settings, item){
     input.max="100"
     input.value = item.quantity
 
-    settings.appendChild(input)
+    settings.appendChild(input)  
 
 }
 
