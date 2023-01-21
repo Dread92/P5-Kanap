@@ -6,10 +6,7 @@
 const queryString = window.location.search
 const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryString' de l'URL
 const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
-if (id !=null) {
-    let price= 0
-    let imgUrl, altText, articleName
-}
+
 
 
 
@@ -25,9 +22,12 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 })
 
+document.title = ` Choix de vote Kanap`
 
 function dataFlow(sofa) {
    
+    
+
     const altTxt= sofa.altTxt
     const colors = sofa.colors
     const description = sofa.description
@@ -82,95 +82,94 @@ function dataFlow(sofa) {
             })
             
         }
+
+
+        productToPurchase()
     }
 
 
 
+    function productToPurchase() {
+        const button = document.querySelector('#addToCart')
+
+        button.addEventListener("click", () => {
 
 
-    const button= document.querySelector ( '#addToCart')
-    button.addEventListener("click", registerclick)
-
-
-
-        function registerclick(){
             const colors = document.querySelector('#colors').value
-            const quantity = document.querySelector("#quantity").value
-
-            if (orderIncorrect(colors, quantity)) return
-            registerCart(colors, quantity)
-            redirectToCart()
-        }
+            const quantity = document.querySelector('#quantity').value
 
 
 
-
-
-        function orderIncorrect (colors, quantity){
-            if
-                (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
-                    (alert ("Sélectionnez une couleur et une quantité"))    
-                   return true
-            }} 
-
-
-
-        function registerCart(colors, quantity) {
-       
-            const item={
-                id:id,
-                colors:colors,
-                quantity:Number ( quantity),
-                /*imageUrl: imgUrl,
-                altTxt : altText,
-                price:sofaPrice,
-                name:articleName,*/
+            const purchase = {
+                id: id,
+                color: colors,
+                quantity: Number(quantity),
+                name: articleName
             }
+       
+    
+            if (orderIncorrect(purchase, colors, quantity)) return
+            addToCart(purchase, colors)
            
-        }
+         
+        })
+    }
+
+    function orderIncorrect ( colors, quantity){
+        if
+            (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
+                (alert ("Sélectionnez une couleur et une quantité entre 1 et 100"))    
+               return true
+        }} 
 
 
-        function addToCart (item){
+
+
+        function addToCart (purchase,colors){
             let cart = JSON.parse(localStorage.getItem("Cart"))
 
             if (cart == null){
                 cart=[]
-                cart.push(item)
+                cart.push(purchase)
                 localStorage.setItem("Cart", JSON.stringify(cart))
             }
 
             else if (cart != null){
                 for(i=0; i<cart.length; i++) {
                     if(
-                        cart[i].id = item.id &&
+                        cart[i].id = purchase.id &&
                         cart[i].colors==colors
                     ){
                         return(
-                            cart[i].quantity = Math.min(cart[i].quantity+item.quantity,100),
+                            cart[i].quantity = Math.min(cart[i].quantity+purchase.quantity,100),
                             localStorage.setItem("cart", JSON.stringify(cart))
                         )
 
                     }
                 }
-            }
+            
 
             for (i=0; i< cart.length; i++){
-                if(cart[i].id == item.ii &&
+                if(cart[i].id == purchase.id &&
                     cart[i].colors != colors ||
-                    cart[i].id != item.id
+                    cart[i].id != purchase.id
                      )
                      {
                         return(
-                            cart.push(item),
-                            localStorage.setItem("cart", JSON.stringify(cart))
-
+                            cart.push(purchase),
+                            localStorage.setItem("Cart", JSON.stringify(cart)),
+                            redirectToCart()
                         )
                      }
             }
 
-
+        }
 
         }
+
+
+
+
 
 
 
