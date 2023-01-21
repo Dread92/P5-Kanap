@@ -84,12 +84,12 @@ function dataFlow(sofa) {
         }
 
 
-        productToPurchase()
+        productToPurchase(id)
     }
 
 
 
-    function productToPurchase() {
+    function productToPurchase(id) {
         const button = document.querySelector('#addToCart')
 
         button.addEventListener("click", () => {
@@ -132,6 +132,7 @@ function dataFlow(sofa) {
                 cart=[]
                 cart.push(purchase)
                 localStorage.setItem("Cart", JSON.stringify(cart))
+               
             }
 
             else if (cart != null){
@@ -142,7 +143,8 @@ function dataFlow(sofa) {
                     ){
                         return(
                             cart[i].quantity = Math.min(cart[i].quantity+purchase.quantity,100),
-                            localStorage.setItem("cart", JSON.stringify(cart))
+                            localStorage.setItem("Cart", JSON.stringify(cart))
+                            
                         )
 
                     }
@@ -158,7 +160,9 @@ function dataFlow(sofa) {
                         return(
                             cart.push(purchase),
                             localStorage.setItem("Cart", JSON.stringify(cart)),
+                           
                             redirectToCart()
+                            
                         )
                      }
             }
@@ -171,7 +175,9 @@ function dataFlow(sofa) {
 
 
 
-
+        function confirmation(purchase){
+            let cart = JSON.parse(localStorage.getItem("Cart"))
+        }
 
 
         function redirectToCart() {
