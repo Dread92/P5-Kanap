@@ -19,10 +19,11 @@ fetch(`http://localhost:3000/api/products/${id}`)
     console.log(`Données de ${sofa.name} récupérées :`, sofa)
 })
 
-document.title = ` Choix de vote Kanap`
 
 function dataFlow(sofa) {
-   
+
+    
+    document.title = ` ${sofa.name}`
     
 
     const altTxt= sofa.altTxt
