@@ -11,10 +11,13 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 
 
-.then((res) => res.json())
+.then
+(function(res){
+    return res.json();
+})
 
-.then((sofa) => {
-
+.then
+(function(sofa){
     dataFlow(sofa)
     console.log(`Données de ${sofa.name} récupérées :`, sofa)
 })
