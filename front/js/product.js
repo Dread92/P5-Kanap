@@ -3,12 +3,8 @@
 /* window.location.href 
     window.location.search
 */ 
-const queryString = window.location.search
-const parametreUrl = new URLSearchParams(queryString); //Recupere la 'queryString' de l'URL
-const  id =  parametreUrl.get("id"); // Recupere la valeur de 'id' dans l'URL
-
-
-
+const id = new URLSearchParams(window.location.search).get("id")
+console.log( id)
 
 
 fetch(`http://localhost:3000/api/products/${id}`)
@@ -49,6 +45,7 @@ function dataFlow(sofa) {
     createPrice (price)
     createDescription ( description)
     createColors ( colors)
+
 }
 
 
@@ -84,7 +81,7 @@ function dataFlow(sofa) {
         }
 
 
-        productToPurchase(id)
+        productToPurchase(id, colors, quantity)
     }
 
 
@@ -136,13 +133,13 @@ function dataFlow(sofa) {
             }
 
             else if (cart != null){
-                for(i=0; i<cart.length; i++) {
+                for(i=0; i < cart.length; i++) {
                     if(
                         cart[i].id = purchase.id &&
-                        cart[i].colors==colors
+                        cart[i].colors == colors
                     ){
                         return(
-                            cart[i].quantity = Math.min(cart[i].quantity+purchase.quantity,100),
+                            cart[i].quantity = Math.min(cart[i].quantity + purchase.quantity,100),
                             localStorage.setItem("Cart", JSON.stringify(cart))
                             
                         )
