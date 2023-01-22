@@ -24,7 +24,7 @@ console.log(product);
 
 }}*/
 
-
+document.title = ` Votre Panier`
 
 const cart= [];
 
