@@ -8,14 +8,15 @@ console.log( id)
 
 
 fetch(`http://localhost:3000/api/products/${id}`)
-.then(function (reponse) {
-    if (reponse.ok) {
-      return reponse.json(); 
-    }
-  })
-  .then(function (id) { 
-    dataFlow(id); 
 
+
+
+.then((res) => res.json())
+
+.then((sofa) => {
+
+    dataFlow(sofa)
+    console.log(`Données de ${sofa.name} récupérées :`, sofa)
 })
 
 document.title = ` Choix de vote Kanap`
