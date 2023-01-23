@@ -86,12 +86,12 @@ function dataFlow(sofa) {
         }
 
 
-        productToPurchase(id, colors, quantity)
+        productToPurchase(colors, quantity)
     }
 
 
 
-    function productToPurchase(id) {
+    function productToPurchase(sofa) {
         const button = document.querySelector('#addToCart')
 
         button.addEventListener("click", () => {
@@ -134,7 +134,7 @@ function dataFlow(sofa) {
                 cart=[]
                 cart.push(purchase)
                 localStorage.setItem("Cart", JSON.stringify(cart))
-               
+                purchaseConfirmation(purchase)
             }
 
             else if (cart != null){
@@ -145,8 +145,8 @@ function dataFlow(sofa) {
                     ){
                         return(
                             cart[i].quantity = Math.min(cart[i].quantity + purchase.quantity,100),
-                            localStorage.setItem("Cart", JSON.stringify(cart))
-                            
+                            localStorage.setItem("Cart", JSON.stringify(cart)),
+                            purchaseConfirmation(purchase)
                         )
 
                     }
@@ -163,7 +163,7 @@ function dataFlow(sofa) {
                             cart.push(purchase),
                             localStorage.setItem("Cart", JSON.stringify(cart)),
                            
-                            redirectToCart()
+                            purchaseConfirmation(purchase)
                             
                         )
                      }
@@ -176,13 +176,28 @@ function dataFlow(sofa) {
 
 
 
-
+/*
         function confirmation(purchase){
             let cart = JSON.parse(localStorage.getItem("Cart"))
-        }
+              function redirectToCart() {
+            window.location.href = "cart.html"
+          }
+        }*/
 
 
         function redirectToCart() {
             window.location.href = "cart.html"
           }
           
+          function purchaseConfirmation(purchase,) 
+          {
+          
+            let cart = JSON.parse(localStorage.getItem("Cart"))
+           
+        
+            if (window.confirm(`${purchase.name} a bien été ajouté au panier !`))
+             {
+                window.location.href = "cart.html"
+            } else {
+                window.close
+            }}
