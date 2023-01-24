@@ -141,7 +141,7 @@ function dataFlow(sofa) {
                 for(i = 0; i < cart.length; i++) {
                     if(
                         cart[i].id == purchase.id &&
-                        cart[i].colors == colors
+                        cart[i].color == purchase.color
                     ){
                         return(
                             cart[i].quantity = Math.min(cart[i].quantity + purchase.quantity,100),
