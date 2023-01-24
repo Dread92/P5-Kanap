@@ -91,7 +91,7 @@ function dataFlow(sofa) {
 
 
 
-    function productToPurchase(sofa) {
+    function productToPurchase() {
         const button = document.querySelector('#addToCart')
 
         button.addEventListener("click", () => {
