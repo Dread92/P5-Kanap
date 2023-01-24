@@ -72,6 +72,7 @@ function displayItem (item){
 
 
     displayArticle(article)
+    
 }
 
 
@@ -90,7 +91,7 @@ function createCartContent(item){
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
     return cardItemContent
-    
+
 }
 
 function createSettings(item){
@@ -116,7 +117,9 @@ function addQuantitySettings(settings, item){
     input.max="100"
     input.value = item.quantity
 
-    settings.appendChild(input)  
+
+    settings.appendChild(input)
+
 
 }
 
