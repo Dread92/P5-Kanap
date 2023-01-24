@@ -86,7 +86,7 @@ function dataFlow(sofa) {
         }
 
 
-        productToPurchase(colors, quantity)
+        productToPurchase(colors, quantity,id)
     }
 
 
@@ -111,7 +111,7 @@ function dataFlow(sofa) {
        
     
             if (orderIncorrect(purchase, colors, quantity)) return
-            addToCart(purchase, colors)
+            addToCart(purchase, colors,id)
            
          
         })
@@ -138,9 +138,9 @@ function dataFlow(sofa) {
             }
 
             else if (cart != null){
-                for(i=0; i < cart.length; i++) {
+                for(i = 0; i < cart.length; i++) {
                     if(
-                        cart[i].id = purchase.id &&
+                        cart[i].id == purchase.id &&
                         cart[i].colors == colors
                     ){
                         return(
@@ -184,12 +184,12 @@ function dataFlow(sofa) {
           }
         }*/
 
-
+/*
         function redirectToCart() {
             window.location.href = "cart.html"
-          }
+          }*/
           
-          function purchaseConfirmation(purchase,) 
+          function purchaseConfirmation(purchase) 
           {
           
             let cart = JSON.parse(localStorage.getItem("Cart"))
@@ -201,3 +201,4 @@ function dataFlow(sofa) {
             } else {
                 window.close
             }}
+
