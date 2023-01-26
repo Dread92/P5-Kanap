@@ -60,7 +60,6 @@ function addQuantitySettings(settings, item){
     quantity.appendChild(p)
 
     const input = document.createElement("input")
-
     input.type = "number"
     input.classList.add("itemQuantity")
     input.name = "itemQuantity"
