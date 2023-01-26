@@ -148,7 +148,6 @@ function dataFlow(sofa) {
                             localStorage.setItem("Cart", JSON.stringify(cart)),
                             purchaseConfirmation(purchase)
                         )
-
                     }
                 }
             
@@ -195,7 +194,7 @@ function dataFlow(sofa) {
             let cart = JSON.parse(localStorage.getItem("Cart"))
            
         
-            if (window.confirm(`${purchase.name} a bien été ajouté au panier !`))
+            if (window.confirm(`Votre article a bien été ajouté au panier !`))
              {
                 window.location.href = "cart.html"
             } else {

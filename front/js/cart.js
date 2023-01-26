@@ -1,98 +1,48 @@
-/* cart js page */
 
-
-/*0: altTxt: "Photo d'un canapé jaune et noir, quattre places"
-colors: "Black/Yellow"
-id: "415b7cacb65d43b2b5c1ff70f3393ad1"
-imageUrl: "http://localhost:3000/images/kanap02.jpeg"
-price: 4499
-quantity: 2
-name: Kanap Sinopé*/
-
-
-/*let basket = JSON.parse(localStorage.getItem("cart"));
-
-
-for (let i = 0; i < basket.length; i++) {
- 
-
-let product = basket[i];
-
-
-console.log(product);
-
-
-}}*/
 
 document.title = ` Votre Panier`
-
 const cart= [];
-
 getStorage()
 console.log(cart)
 cart.forEach(item => displayItem(item))
 
 
 function getStorage(){
-
     const numberOfProducts= localStorage.length;
 
-
-for (let i=0 ; i < numberOfProducts; i++){
-
-
+    for (let i=0 ; i < numberOfProducts; i++){
     const item=localStorage.getItem(localStorage.key(i)) ||""
     const itemProduct = JSON.parse(item)
     cart.push(itemProduct)
-
-
 }
 }
-
-
-
 
 
 function displayItem (item){
 
-
     const article = createArticle(item)
-    
-
-
-    
     const imageDiv = createImageInDiv (item)
     article.appendChild(imageDiv)
-
-
-
     const cardItemContent= createCartContent(item)
     article.appendChild(cardItemContent)
 
-
-
     displayArticle(article)
-    
 }
-
-
-
 
 
 function createCartContent(item){
 
    const cardItemContent = document.createElement('div')
    cardItemContent.classList.add("cart__item__content")
-
-
    const description = createDescription(item)
     const settings = createSettings(item)
-
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
-    return cardItemContent
 
+    return cardItemContent
 }
+
+
 
 function createSettings(item){
     const settings= document.createElement("div")
@@ -110,6 +60,7 @@ function addQuantitySettings(settings, item){
     quantity.appendChild(p)
 
     const input = document.createElement("input")
+
     input.type = "number"
     input.classList.add("itemQuantity")
     input.name = "itemQuantity"
@@ -117,45 +68,34 @@ function addQuantitySettings(settings, item){
     input.max="100"
     input.value = item.quantity
 
-
     settings.appendChild(input)
-
-
 }
 
+
+
 function createDescription (item) {
-   /* if (!item)
-    return false */
-    
+
     const description= document.createElement("div")
     description.classList.add("cart__item__content__description")
-
     const h2 = document.createElement("h2")
     h2.textContent = item.name
-
-
     const pColor = document.createElement("p")
     pColor.innerText = item.colors
     console.log(item.colors)
     const pPrice = document.createElement("p")
     pPrice.innerText = item.price + "€"
 
-
     description.appendChild(h2)
     description.appendChild(pColor)
     description.appendChild(pPrice)
 
     return description
-
-  
-
 }
 
 
 function displayArticle(article){
     document.querySelector("#cart__items") .appendChild(article)
 }
-
 
 
 function createArticle(item){
@@ -169,18 +109,14 @@ function createArticle(item){
 
 function createImageInDiv (item){
 
-
     const div = document.createElement("div")
     div.classList.add("cart__item__img")
-
-
     const image= document.createElement('img')
     image.src = item.imageUrl 
     image.alt= item.altTxt
-
     div.appendChild(image)
+
     return div
-    
 }
 
 
