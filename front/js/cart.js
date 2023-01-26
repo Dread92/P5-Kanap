@@ -1,5 +1,22 @@
 
 
+fetch(`http://localhost:3000/api/products/${id}`)
+
+
+
+.then
+(function(res){
+    return res.json();
+})
+
+.then
+(function(products){
+    getStorage(products)
+   
+})
+
+
+
 document.title = ` Votre Panier`
 const cart= [];
 getStorage()
