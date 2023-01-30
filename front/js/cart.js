@@ -21,10 +21,10 @@ fetch(`http://localhost:3000/api/products`)
 
 
 document.title = ` Votre Panier`
-const cart= [];
-getStorage()
-console.log(cart)
-cart.forEach(item => displayItem(item))
+
+
+
+
 
 function getStorage(products) {
     const cart = JSON.parse(localStorage.getItem("Cart"));
