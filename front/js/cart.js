@@ -145,7 +145,7 @@ function createImageInDiv (item){
 function isEmailInvalid(){
     const email=document.querySelector("#email")
 
-    const regex = /^[A-Za-Z0-9+_.-]+@(.+)$/
+    const regex = /^[A-Za-z0-9+_.-]+@(.+)$/
 
     if(regex.test(email)=== false){
         alert("Entrez une adresse mail valide")
