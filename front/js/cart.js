@@ -1,5 +1,5 @@
 
-
+/*
 fetch(`http://localhost:3000/api/products`)
 
 
@@ -18,12 +18,13 @@ fetch(`http://localhost:3000/api/products`)
 .catch(function (error) {
     console.log("Message d'erreur : \n" + error);
   });
-
+*/
 
 document.title = ` Votre Panier`
 
 
-
+const cart = JSON.parse(localStorage.getItem("Cart"));
+cart.forEach(item => displayItem(item))
 
 
 function getStorage(products) {
@@ -49,23 +50,39 @@ function getStorage(products) {
 
 
 function displayItem (item){
+    console.log(item)
+    fetch(`http://localhost:3000/api/products/${item.id}`)
+.then
+(function(res){
+    return res.json();
+})
+
+.then
+(function(sofa){
+    
 
     const article = createArticle(item)
-    const imageDiv = createImageInDiv (item)
+    const imageDiv = createImageInDiv (sofa)
     article.appendChild(imageDiv)
-    const cardItemContent= createCartContent(item)
+    const cardItemContent= createCartContent(sofa, item)
     article.appendChild(cardItemContent)
 
     displayArticle(article)
+  
+})
+.catch(function (error) {
+    console.log("Message d'erreur : \n" + error);
+  });
+  
 }
 
 
-function createCartContent(item){
+function createCartContent(item, product){
 
    const cardItemContent = document.createElement('div')
    cardItemContent.classList.add("cart__item__content")
    const description = createDescription(item)
-    const settings = createSettings(item)
+    const settings = createSettings(item, product)
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
 
@@ -74,15 +91,15 @@ function createCartContent(item){
 
 
 
-function createSettings(item){
+function createSettings(item, product){
     const settings= document.createElement("div")
     settings.classList.add("cart__item__settings")
 
-    addQuantitySettings(settings, item)
+    addQuantitySettings(settings, item, product)
     return settings
 }
 
-function addQuantitySettings(settings, item){
+function addQuantitySettings(settings, item, product){
     const quantity = document.createElement("div")
     quantity.classList.add("cart__item__content__settings__quantity")
     const p = document.createElement("p")
@@ -95,7 +112,7 @@ function addQuantitySettings(settings, item){
     input.name = "itemQuantity"
     input.min="1"
     input.max="100"
-    input.value = item.quantity
+    input.value = product.quantity
 
     settings.appendChild(input)
 }

@@ -100,7 +100,7 @@ function dataFlow(sofa) {
                 id: id,
                 color: colors,
                 quantity: Number(quantity),
-                name: articleName
+                
             }
        
     
