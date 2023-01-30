@@ -15,7 +15,9 @@ fetch(`http://localhost:3000/api/products`)
     getStorage(products)
    
 })
-
+.catch(function (error) {
+    console.log("Message d'erreur : \n" + error);
+  });
 
 
 document.title = ` Votre Panier`
