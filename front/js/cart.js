@@ -152,7 +152,7 @@ function createImageInDiv (item){
 
 
 
-// REGEX
+// REGEX part for email and city
 
 function isEmailInvalid(){
     const email=document.querySelector("#email")
@@ -176,4 +176,10 @@ function isCityInvalid(){
         return true
     }
     return false
+}
+
+function isFormValid(){
+    if(isCityInvalid() || isEmailInvalid() ){
+        alert("Votre adresse email ou votre adresse postale est invalide")    }
+    
 }
