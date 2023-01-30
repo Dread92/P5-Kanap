@@ -11,7 +11,7 @@ fetch(`http://localhost:3000/api/products`)
 
 .then
 (function(products){
-    console.log("API :", products)
+    console.log(products)
     getStorage(products)
    
 })
@@ -26,15 +26,25 @@ getStorage()
 console.log(cart)
 cart.forEach(item => displayItem(item))
 
-
-function getStorage(){
-    const numberOfProducts= localStorage.length;
-
-    for (let i=0 ; i < numberOfProducts; i++){
-    const item=localStorage.getItem(localStorage.key(i)) ||""
-    const itemProduct = JSON.parse(item)
-    cart.push(itemProduct)
-}
+function getStorage(products) {
+    const cart = JSON.parse(localStorage.getItem("Cart"));
+    if (cart != null) {
+        for (let product of cart) {
+            for (let a = 0, b = products.length; a < b; a++) {
+                if (product.id === products[a]._id) {
+                    product.name = products[a].name;
+                    product.price = products[a].price;
+                    product.imageUrl = products[a].imageUrl;
+                    product.altTxt = products[a].altTxt;
+                    product.description = products[a].description;
+                }
+            }
+        }
+        console.log( "Produits dans le panier:" , cart)
+    }
+    else {
+       alert(("Aucun article dans le panier"))
+    }
 }
 
 
@@ -151,6 +161,18 @@ function isEmailInvalid(){
 
     if(regex.test(email)=== false){
         alert("Entrez une adresse mail valide")
+        return true
+    }
+    return false
+}
+
+function isCityInvalid(){
+    const city=document.querySelector("#city")
+
+    const cityRegex = /^(?![\s.]+$)[A-zÀ-ú\s\-']{1,25}$/
+
+    if(cityRegex.test(city)=== false){
+        alert("Entrez une adresse postale valide")
         return true
     }
     return false
