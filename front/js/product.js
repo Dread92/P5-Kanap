@@ -20,6 +20,9 @@ fetch(`http://localhost:3000/api/products/${id}`)
     dataFlow(sofa)
     console.log(`Données de ${sofa.name} récupérées :`, sofa)
 })
+.catch(function (error) {
+    console.log("Message d'erreur : \n" + error);
+  });
 
 
 function dataFlow(sofa) {
