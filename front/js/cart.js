@@ -11,6 +11,7 @@ fetch(`http://localhost:3000/api/products`)
 
 .then
 (function(products){
+    console.log("API :", products)
     getStorage(products)
    
 })
@@ -101,6 +102,7 @@ function createDescription (item) {
     const pPrice = document.createElement("p")
     pPrice.innerText = item.price + "€"
 
+
     description.appendChild(h2)
     description.appendChild(pColor)
     description.appendChild(pPrice)
@@ -134,7 +136,6 @@ function createImageInDiv (item){
 
     return div
 }
-
 
 
 

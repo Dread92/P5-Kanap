@@ -36,7 +36,7 @@ _id:"107fb5b75607497b96722bda5b504926" */
 
    
      
-
+      
       const link = makeLink (id)
       const article = document.createElement('article') /* la fonction make article n'avait qu'une ligne */
       const image = createImage(imageUrl, altTxt)

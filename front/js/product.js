@@ -7,10 +7,9 @@ const id = new URLSearchParams(window.location.search).get("id")
 console.log( id)
 
 
+
+// on appelle l'API pour qu'elle nous donne l'ID du produit de la page sur laquelle on est// 
 fetch(`http://localhost:3000/api/products/${id}`)
-
-
-
 .then
 (function(res){
     return res.json();
@@ -24,11 +23,8 @@ fetch(`http://localhost:3000/api/products/${id}`)
 
 
 function dataFlow(sofa) {
-
-    
     document.title = ` ${sofa.name}`
     
-
     const altTxt= sofa.altTxt
     const colors = sofa.colors
     const description = sofa.description
@@ -36,21 +32,16 @@ function dataFlow(sofa) {
     const name = sofa.name
     const price = sofa.price
 
-
     sofaPrice = price;
     imgUrl= imageUrl;
     altText=altTxt;
     articleName=name;
   
-
-
-
     createImage( imageUrl, altTxt)
     createTitle ( name )
     createPrice (price)
     createDescription ( description)
     createColors ( colors)
-
 }
 
 
