@@ -93,7 +93,7 @@ function dataFlow(sofa) {
 
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector('#quantity').value
-
+                
 
 
             const purchase = {

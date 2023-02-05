@@ -113,7 +113,7 @@ function addQuantitySettings(settings, item, product){
     input.min="1"
     input.max="100"
     input.value = product.quantity
-
+    
     settings.appendChild(input)
 }
 
@@ -154,6 +154,7 @@ function createArticle(item){
 }
 
 
+
 function createImageInDiv (item){
 
     const div = document.createElement("div")
@@ -173,10 +174,10 @@ function createImageInDiv (item){
 
 function isEmailInvalid(){
     const email=document.querySelector("#email")
-
+   
     const regex = /^[A-Za-z0-9+_.-]+@(.+)$/
 
-    if(regex.test(email)=== false){
+    if(regex.test(email)===false){
         alert("Entrez une adresse mail valide")
         return true
     }
@@ -194,6 +195,7 @@ function isCityInvalid(){
     }
     return false
 }
+
 
 function isFormValid(){
     if(isCityInvalid() || isEmailInvalid() ){
