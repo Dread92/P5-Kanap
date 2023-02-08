@@ -27,26 +27,7 @@ const cart = JSON.parse(localStorage.getItem("Cart"));
 cart.forEach(item => displayItem(item))
 
 
-function getStorage(products) {
-    const cart = JSON.parse(localStorage.getItem("Cart"));
-    if (cart != null) {
-        for (let product of cart) {
-            for (let a = 0, b = products.length; a < b; a++) {
-                if (product.id === products[a]._id) {
-                    product.name = products[a].name;
-                    product.price = products[a].price;
-                    product.imageUrl = products[a].imageUrl;
-                    product.altTxt = products[a].altTxt;
-                    product.description = products[a].description;
-                }
-            }
-        }
-        console.log( "Produits dans le panier:" , cart)
-    }
-    else {
-       alert(("Aucun article dans le panier"))
-    }
-}
+
 
 
 function displayItem (item){
@@ -202,3 +183,41 @@ function isFormValid(){
         alert("Votre adresse email ou votre adresse postale est invalide")    }
     
 }
+
+
+
+
+
+
+
+function totalCart() {
+    let totalProducts = 0
+    let totalPrice = 0
+
+    
+    const products = document.querySelectorAll(".cart__item")
+    products.forEach((item, sofa, displayItem ) => {
+        totalProducts += JSON.parse(item.dataset.quantity)
+        totalPrice += item.dataset.quantity * item.dataset.price
+    });
+    document.getElementById("totalQuantity").textContent = totalProducts
+    document.getElementById("totalPrice").textContent = totalPrice
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

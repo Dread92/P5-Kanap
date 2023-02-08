@@ -74,8 +74,8 @@ function dataFlow(sofa) {
                 const option = document.createElement('option')
                 option.value = colors
                 option.textContent = colors
-                select.appendChild (option)
-            })
+                select.appendChild (option) 
+            })  
             
         }
 
@@ -90,7 +90,7 @@ function dataFlow(sofa) {
 
         button.addEventListener("click", () => {
 
-
+            
             const colors = document.querySelector('#colors').value
             const quantity = document.querySelector('#quantity').value
                 
