@@ -1,24 +1,5 @@
 
-/*
-fetch(`http://localhost:3000/api/products`)
 
-
-
-.then
-(function(res){
-    return res.json();
-})
-
-.then
-(function(products){
-    console.log(products)
-    getStorage(products)
-   
-})
-.catch(function (error) {
-    console.log("Message d'erreur : \n" + error);
-  });
-*/
 
 document.title = ` Votre Panier`
 
@@ -147,6 +128,36 @@ function createImageInDiv (item){
 
     return div
 }
+
+
+
+
+
+function totalCart() {
+
+
+    let totalProducts = 0
+    let totalPrice = 0
+
+
+
+    const purchases = document.querySelectorAll(".cart__item")
+
+
+    purchases.forEach((sofa) => {
+        totalProducts += JSON.parse(sofa.dataset.quantity)
+        totalPrice += sofa.dataset.quantity * sofa.dataset.price
+    });
+
+    
+    document.getElementById("totalQuantity").textContent = totalProducts
+    document.getElementById("totalPrice").textContent = totalPrice
+}
+
+
+
+
+
 
 
 
