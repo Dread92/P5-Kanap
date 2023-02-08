@@ -171,6 +171,18 @@ function isCityInvalid(){
     const cityRegex = /^(?![\s.]+$)[A-zÀ-ú\s\-']{1,25}$/
 
     if(cityRegex.test(city)=== false){
+        alert("Entrez un nom de ville valide")
+        return true
+    }
+    return false
+}
+
+function isAddressInvalid(){
+    const address=document.querySelector("#address")
+
+    const addressRegex= /d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*/
+
+    if(addressRegex.test(address)=== false){
         alert("Entrez une adresse postale valide")
         return true
     }
@@ -178,34 +190,40 @@ function isCityInvalid(){
 }
 
 
+function isFirstNameInvalid(){
+    const firstName=document.querySelector("#firstName")
+    const firstNameRegex = /^[a-z ,.'-]+$/i
+
+    if(firstNameRegex.test(firstName)=== false){
+        alert("Entrez un prénom valide")
+        return true
+    }
+    return false
+
+}
+
+
+function isLastnameInvalid(){
+    const lastName=document.querySelector("#lastName")
+    const lastNameRegex = /^[a-z ,.'-]+$/i
+
+    if(lastNameRegex.test(lastName)=== false){
+        alert("Entrez un prénom valide")
+        return true
+    }
+    return false
+
+}
+
+
+
+
+
 function isFormValid(){
-    if(isCityInvalid() || isEmailInvalid() ){
-        alert("Votre adresse email ou votre adresse postale est invalide")    }
+    if(isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid() ){
+        alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")    }
     
 }
-
-
-
-
-
-
-
-function totalCart() {
-    let totalProducts = 0
-    let totalPrice = 0
-
-    
-    const products = document.querySelectorAll(".cart__item")
-    products.forEach((item, sofa, displayItem ) => {
-        totalProducts += JSON.parse(item.dataset.quantity)
-        totalPrice += item.dataset.quantity * item.dataset.price
-    });
-    document.getElementById("totalQuantity").textContent = totalProducts
-    document.getElementById("totalPrice").textContent = totalPrice
-}
-
-
-
 
 
 
