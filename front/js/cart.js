@@ -6,7 +6,7 @@ document.title = ` Votre Panier`
 
 const cart = JSON.parse(localStorage.getItem("Cart"));
 cart.forEach(item => displayItem(item))
-
+totalCart()
 
 
 
@@ -35,6 +35,8 @@ function displayItem (item){
 .catch(function (error) {
     console.log("Message d'erreur : \n" + error);
   });
+  
+
   
 }
 
@@ -135,18 +137,19 @@ function createImageInDiv (item){
 
 function totalCart() {
 
-
+    console.log("ici")
     let totalProducts = 0
     let totalPrice = 0
 
 
 
     const purchases = document.querySelectorAll(".cart__item")
-
+    console.log(purchases)
 
     purchases.forEach((sofa) => {
         totalProducts += JSON.parse(sofa.dataset.quantity)
         totalPrice += sofa.dataset.quantity * sofa.dataset.price
+        console.log(sofa.dataset.quantity)
     });
 
     
@@ -155,7 +158,9 @@ function totalCart() {
 }
 
 
+function updateQuantity(){} //fetch+localstorage+totalcart
 
+function deleteArticle(){} // localstorage + totalcart
 
 
 
@@ -175,6 +180,11 @@ function isEmailInvalid(){
     }
     return false
 }
+
+
+
+
+
 
 function isCityInvalid(){
     const city=document.querySelector("#city")
@@ -233,11 +243,11 @@ function isLastnameInvalid(){
 function isFormValid(){
     if(isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid() ){
         alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")    }
-    
+    //else fetch
 }
 
 
-
+// window.location.href = "confirmation.html" + "?orderId=" + data.orderId ;
 
 
 
