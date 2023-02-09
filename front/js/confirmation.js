@@ -1,7 +1,7 @@
 
 const orderId = getOrderId()
 
-
+document.getElementById("orderId").innerText=orderId
 
 
 function getOrderId() {
