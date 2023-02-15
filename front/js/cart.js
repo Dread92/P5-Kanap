@@ -1,11 +1,34 @@
-
-
-
 document.title = ` Votre Panier`
 
-
 const cart = JSON.parse(localStorage.getItem("Cart"));
+
+const fetchAPI = (url, method, type, datas) => {
+     
+    let options = {
+        method: method,
+        headers: { "Content-Type": type}
+    }
+
+    if (!url || !method || !type)
+        return false;
+    
+    if (method === 'POST'){
+        options.body = JSON.stringify( datas )
+    }
+    
+    return fetch(url, options )
+        .then((res) => res.json())
+        .then((data) => {
+            return data
+        })
+        .catch((error) => {
+            alert( ERROR_SERVER )
+        })
+}
+
+
 cart.forEach(item => displayItem(item))
+
 totalCart()
 
 
@@ -77,6 +100,9 @@ function addQuantitySettings(settings, item, product){
     input.min="1"
     input.max="100"
     input.value = product.quantity
+
+    input.addEventListener('change', (e) => updateQuantity(product.id, product.color, input.value))
+
     
     settings.appendChild(input)
 }
@@ -131,41 +157,75 @@ function createImageInDiv (item){
     return div
 }
 
+async function totalCart() {
 
-
-
-
-function totalCart() {
-
-  
-
-    console.log("ici")
-    let totalQuantity  = 0
-    let totalPrice  = 0
-
-    for (let i = 0; i < cart.length; i++) {
-        let productsInCart = cart[i].quantity;
-        totalQuantity += parseInt(productsInCart);
-
-        let priceInCart = cart[i].price * cart[i].quantity;
-        totalPrice += priceInCart;
+    let nb = 0
+    let total = 0
+        
+    for ( let product of cart ) {
+        
+        let datasProduct = await fetchAPI( 'http://localhost:3000/api/products/' + product.id , 'GET' , 'application/json' , false )
+        
+        nb += parseInt( product.quantity )
+        
+        total += ( parseInt(product.quantity) * parseInt(datasProduct.price) )
+        
     }
-
-    document.getElementById("totalQuantity").textContent = totalQuantity
-    document.getElementById("totalPrice").textContent = totalPrice
+    
+    document.getElementById("totalQuantity").innerText = nb
+    document.getElementById("totalPrice").innerText = total
     
 }
 
 
-function updateQuantity(){
+const updateQuantity = (productId, productColor, qty) => {
+        
+    if (!productId || !productColor || !qty)
+        return false;
 
-
-} //fetch+localstorage+totalcart
-
-function deleteArticle(){
-
+    let indexProduct = cart.findIndex(
+        (el) => el.id === productId && el.color == productColor
+    ) 
     
-} // localstorage + totalcart
+    if (indexProduct != -1) {
+        
+        cart[indexProduct].quantity = parseInt(qty)
+        
+        localStorage.setItem("Cart", JSON.stringify(cart))
+
+        document.location.href = "cart.html"
+
+    } else {
+        
+        return false;
+
+    }
+}
+
+const deleteArticle = (productId, productColor) => {
+    
+    if (!productId || !productColor)
+        return false;
+    
+    let indexProduct = cart.findIndex(
+        (el) => el.id === productId && el.color == productColor
+    ) 
+
+    if (indexProduct != -1) {
+        
+        cart.splice(indexProduct, 1)
+        
+        localStorage.setItem("Cart", JSON.stringify(cart))
+
+        document.location.href = "cart.html"
+
+    } else {
+        
+        return false;
+
+    }
+    
+}
 
 
 
@@ -252,15 +312,3 @@ function isFormValid(){
 
 
 // window.location.href = "confirmation.html" + "?orderId=" + data.orderId ;
-
-
-
-
-
-
-
-
-
-
-
-
