@@ -203,7 +203,11 @@ const updateQuantity = (productId, productColor, qty) => {
 }
 
 const deleteArticle = (productId, productColor) => {
+
+
     
+    const deletePurchase = document.querySelectorAll(".cart__item .deleteItem")
+
     if (!productId || !productColor)
         return false;
     
