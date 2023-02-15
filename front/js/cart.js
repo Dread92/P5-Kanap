@@ -137,30 +137,35 @@ function createImageInDiv (item){
 
 function totalCart() {
 
+  
+
     console.log("ici")
-    let totalProducts = 0
-    let totalPrice = 0
+    let totalQuantity  = 0
+    let totalPrice  = 0
 
+    for (let i = 0; i < cart.length; i++) {
+        let productsInCart = cart[i].quantity;
+        totalQuantity += parseInt(productsInCart);
 
+        let priceInCart = cart[i].price * cart[i].quantity;
+        totalPrice += priceInCart;
+    }
 
-    const purchases = document.querySelectorAll(".cart__item")
-    console.log(purchases)
-
-    purchases.forEach((sofa) => {
-        totalProducts += JSON.parse(sofa.dataset.quantity)
-        totalPrice += sofa.dataset.quantity * sofa.dataset.price
-        console.log(sofa.dataset.quantity)
-    });
-
-    
-    document.getElementById("totalQuantity").textContent = totalProducts
+    document.getElementById("totalQuantity").textContent = totalQuantity
     document.getElementById("totalPrice").textContent = totalPrice
+    
 }
 
 
-function updateQuantity(){} //fetch+localstorage+totalcart
+function updateQuantity(){
 
-function deleteArticle(){} // localstorage + totalcart
+
+} //fetch+localstorage+totalcart
+
+function deleteArticle(){
+
+    
+} // localstorage + totalcart
 
 
 
@@ -182,7 +187,7 @@ function isEmailInvalid(){
 }
 
 
-
+ 
 
 
 
@@ -210,7 +215,6 @@ function isAddressInvalid(){
     return false
 }
 
-
 function isFirstNameInvalid(){
     const firstName=document.querySelector("#firstName")
     const firstNameRegex = /^[a-z ,.'-]+$/i
@@ -220,7 +224,7 @@ function isFirstNameInvalid(){
         return true
     }
     return false
-
+    
 }
 
 
