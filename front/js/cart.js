@@ -72,6 +72,7 @@ function createSettings(item, product){
 
     addQuantitySettings(settings, item, product)
 
+    addDeleteSettings(settings, product)
 
 
 
@@ -99,17 +100,22 @@ function addQuantitySettings(settings, item, product){
     
     settings.appendChild(input)
 
+
+}
+
+function addDeleteSettings(settings, product) {
+
     const deleteButton = document.createElement("div");
 
-    settings.appendChild(deleteButton);
     deleteButton.className = "cart__item__content__settings__delete";
     let deleteProduct = document.createElement("p");
     deleteButton.appendChild(deleteProduct);
     deleteProduct.className = "deleteItem";
     deleteProduct.innerHTML = "Supprimer";
 
+    deleteProduct.addEventListener('click', (e) => deleteArticle(product.id, product.color))
 
-
+    settings.appendChild(deleteButton); 
 }
 
 
