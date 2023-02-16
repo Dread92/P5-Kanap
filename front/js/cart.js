@@ -73,17 +73,8 @@ function createSettings(item, product){
     addQuantitySettings(settings, item, product)
 
 
-    
-    const deleteButton = document.createElement("div");
 
-        settings.appendChild(deleteButton);
-        deleteButton.className = "cart__item__content__settings__delete";
-        let deleteProduct = document.createElement("p");
-        deleteButton.appendChild(deleteProduct);
-        deleteProduct.className = "deleteItem";
-        deleteProduct.innerHTML = "Supprimer";
-    
- 
+
 
     return settings
 }
@@ -107,6 +98,16 @@ function addQuantitySettings(settings, item, product){
     // générer bouton supprimer ( deleteitem) + gestion du addeventlistener
     
     settings.appendChild(input)
+
+    const deleteButton = document.createElement("div");
+
+    settings.appendChild(deleteButton);
+    deleteButton.className = "cart__item__content__settings__delete";
+    let deleteProduct = document.createElement("p");
+    deleteButton.appendChild(deleteProduct);
+    deleteProduct.className = "deleteItem";
+    deleteProduct.innerHTML = "Supprimer";
+
 
 
 }
