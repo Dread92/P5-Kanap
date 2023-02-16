@@ -34,17 +34,9 @@ totalCart()
 
 
 
-function displayItem (item){
-    console.log(item)
-    fetch(`http://localhost:3000/api/products/${item.id}`)
-.then
-(function(res){
-    return res.json();
-})
+async function displayItem (item){
 
-.then
-(function(sofa){
-    
+    let sofa = await fetchAPI( 'http://localhost:3000/api/products/' + item.id , 'GET' , 'application/json' , false )
 
     const article = createArticle(item)
     const imageDiv = createImageInDiv (sofa)
@@ -52,13 +44,7 @@ function displayItem (item){
     const cardItemContent= createCartContent(sofa, item)
     article.appendChild(cardItemContent)
 
-    displayArticle(article)
-  
-})
-.catch(function (error) {
-    console.log("Message d'erreur : \n" + error);
-  });
-  
+    displayArticle(article) 
 
   
 }
@@ -102,7 +88,7 @@ function addQuantitySettings(settings, item, product){
     input.value = product.quantity
 
     input.addEventListener('change', (e) => updateQuantity(product.id, product.color, input.value))
-
+    // générer bouton supprimer ( deleteitem) + gestion du addeventlistener
     
     settings.appendChild(input)
 }
@@ -205,9 +191,6 @@ const updateQuantity = (productId, productColor, qty) => {
 const deleteArticle = (productId, productColor) => {
 
 
-    
-    const deletePurchase = document.querySelectorAll(".cart__item .deleteItem")
-
     if (!productId || !productColor)
         return false;
     
@@ -308,7 +291,7 @@ function isLastnameInvalid(){
 
 
 
-function isFormValid(){
+function isFormInvalid(){
     if(isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid() ){
         alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")    }
     //else fetch
