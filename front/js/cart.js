@@ -46,15 +46,16 @@ async function displayItem (item){
 
     displayArticle(article) 
 
-  
+    
 }
+
 
 
 function createCartContent(item, product){
 
    const cardItemContent = document.createElement('div')
    cardItemContent.classList.add("cart__item__content")
-   const description = createDescription(item)
+   const description = createDescription(item,product)
     const settings = createSettings(item, product)
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
@@ -64,11 +65,26 @@ function createCartContent(item, product){
 
 
 
+
 function createSettings(item, product){
     const settings= document.createElement("div")
-    settings.classList.add("cart__item__settings")
+    settings.classList.add("cart__item__content__settings")
 
     addQuantitySettings(settings, item, product)
+
+
+    
+    const deleteButton = document.createElement("div");
+
+        settings.appendChild(deleteButton);
+        deleteButton.className = "cart__item__content__settings__delete";
+        let deleteProduct = document.createElement("p");
+        deleteButton.appendChild(deleteProduct);
+        deleteProduct.className = "deleteItem";
+        deleteProduct.innerHTML = "Supprimer";
+    
+ 
+
     return settings
 }
 
@@ -91,6 +107,8 @@ function addQuantitySettings(settings, item, product){
     // générer bouton supprimer ( deleteitem) + gestion du addeventlistener
     
     settings.appendChild(input)
+
+
 }
 
 
@@ -108,11 +126,15 @@ function createDescription (item) {
     pPrice.innerText = item.price + "€"
 
 
+
+
+
     description.appendChild(h2)
     description.appendChild(pColor)
     description.appendChild(pPrice)
 
     return description
+    
 }
 
 
@@ -142,6 +164,9 @@ function createImageInDiv (item){
 
     return div
 }
+
+
+
 
 async function totalCart() {
 
@@ -188,9 +213,11 @@ const updateQuantity = (productId, productColor, qty) => {
     }
 }
 
+
+
 const deleteArticle = (productId, productColor) => {
 
-
+  
     if (!productId || !productColor)
         return false;
     
@@ -212,6 +239,7 @@ const deleteArticle = (productId, productColor) => {
 
     }
     
+   
 }
 
 
