@@ -104,8 +104,8 @@ function dataFlow(sofa) {
             }
        
     
-            if (orderIncorrect(purchase, colors, quantity)) return
-            addToCart(purchase, colors,id)
+            if (orderIncorrect(colors, quantity)) return false;
+            addToCart(purchase, colors)
            
          
         })
@@ -113,7 +113,7 @@ function dataFlow(sofa) {
 
     function orderIncorrect ( colors, quantity){
         if
-            (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity < 1 || quantity > 100){
+            (colors == null || colors == ""|| quantity == null || quantity == 0 || quantity  <= 0|| quantity > 100){
                 (alert ("Sélectionnez une couleur et une quantité entre 1 et 100"))    
                return true
         }} 
