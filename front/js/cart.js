@@ -73,6 +73,10 @@ function createSettings(item, product){
     addQuantitySettings(settings, item, product)
 
     addDeleteSettings(settings, product)
+
+
+
+
     return settings
 }
 
@@ -93,8 +97,7 @@ function addQuantitySettings(settings, item, product){
 
     input.addEventListener('change', (e) => updateQuantity(product.id, product.color, input.value))
     // générer bouton supprimer ( deleteitem) + gestion du addeventlistener
-    if (orderIncorrect(colors, quantity)) return false;
-
+    
     settings.appendChild(input)
 
 
