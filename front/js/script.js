@@ -1,3 +1,5 @@
+
+//On fait tout d'abord un appel à l'API via une requête fetch pour avoir les données des produits. Si une erreur intervient durant le process, cela va renvoyer une erreur.
 fetch("http://localhost:3000/api/products")
     .then(function (reponse) {
       if (reponse.ok) {
@@ -13,6 +15,8 @@ fetch("http://localhost:3000/api/products")
     });
     	
     document.title = ` Bienvenue chez Kanap`
+
+    // Données que l'on veut récupérer dans l'API: 
     /* altTxt: "Photo d'un canapé bleu, deux places"
 colors:(3) ['Blue', 'White', 'Black']
 description:"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
