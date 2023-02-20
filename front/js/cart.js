@@ -1,7 +1,8 @@
+// titre de la page
 document.title = ` Votre Panier`
-
+// on récupètre la clé Cart dans le localStorage et onn lui associe la constante cart
 const cart = JSON.parse(localStorage.getItem("Cart"));
-
+// on fait appel à l'API via une requête fetch, en utilisant une méthode flexible POST/GET grâce à la variable "options"
 const fetchAPI = (url, method, type, datas) => {
      
     let options = {
@@ -12,54 +13,44 @@ const fetchAPI = (url, method, type, datas) => {
     if (!url || !method || !type)
         return false;
     
-    if (method === 'POST'){
+    if (method === 'POST'){ // si la method est strictement POST, on récupère les produits via " datas"
         options.body = JSON.stringify( datas )
     }
     
-    return fetch(url, options )
+    return fetch(url, options )// on fait un fetch sur l'URL du produit d'où vient la redirection + les différentes options que l'utilisateur avait défini
         .then((res) => res.json())
         .then((data) => {
             return data
         })
-        .catch((error) => {
+        .catch((error) => { // si une erreur survient, une alerte s'affiche
             alert( ERROR_SERVER )
         })
 }
-
-
-cart.forEach(item => displayItem(item))
-
-totalCart()
+cart.forEach(item => displayItem(item)) // on fait une boucle sur l'array du localstorage afin d'afficher correctement les produits sur la page du panier via la fonction displayItem
+totalCart()// On appelle la fonction totalCart pour calculer le prix total du panier
 
 
 
 
 async function displayItem (item){
-
     let sofa = await fetchAPI( 'http://localhost:3000/api/products/' + item.id , 'GET' , 'application/json' , false )
-
     const article = createArticle(item)
     const imageDiv = createImageInDiv (sofa)
     article.appendChild(imageDiv)
     const cardItemContent= createCartContent(sofa, item)
     article.appendChild(cardItemContent)
-
-    displayArticle(article) 
-
-    
+    displayArticle(article)    
 }
 
 
 
 function createCartContent(item, product){
-
    const cardItemContent = document.createElement('div')
    cardItemContent.classList.add("cart__item__content")
    const description = createDescription(item,product)
     const settings = createSettings(item, product)
     cardItemContent.appendChild(description)
     cardItemContent.appendChild(settings)
-
     return cardItemContent
 }
 
