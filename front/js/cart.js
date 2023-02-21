@@ -159,9 +159,9 @@ const updateQuantity = (productId, productColor, qty) => {
 }
 
 
-
+// fonction qui permet d'intéragir avec le bouton supprimer pour qu'il efface des articles
 const deleteArticle = (productId, productColor) => {
-    if (!productId || !productColor)
+    if (!productId || !productColor)// on vérifie qu'aucun des paramètres ne manque
         return false;
     let indexProduct = cart.findIndex(
         (el) => el.id === productId && el.color == productColor
@@ -177,7 +177,7 @@ const deleteArticle = (productId, productColor) => {
 
 
 
-// REGEX part for email and city
+// fonctions pour chaque élément du formulaire afin de vérifier la validité ce ceux-ci et prévenir l'utilisateur de saisir des données interdites par le REGEX
 function isEmailInvalid() {
     const email = document.querySelector("#email")
     const regex = /^[A-Za-z0-9+_.-]+@(.+)$/
@@ -230,7 +230,7 @@ function isLastnameInvalid() {
 
 }
 
-
+// fonction globale qui verifie chaque champ du fomulaire; si l'un des champs est invalide, une erreur est renvoyée.
 function isFormInvalid() {
     if (isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid()) {
         alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")
