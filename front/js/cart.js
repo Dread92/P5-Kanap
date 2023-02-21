@@ -93,14 +93,13 @@ function addDeleteSettings(settings, product) {
     settings.appendChild(deleteButton);
 }
 // fonction qui va permettre de créer le contenu de la carte produit dans le panier 
-function createDescription(item) {
+function createDescription(item, product) {
     const description = document.createElement("div")// création de la div 
     description.classList.add("cart__item__content__description")// création de la classe dans le HTML
     const h2 = document.createElement("h2")// création du titre
     h2.textContent = item.name
     const pColor = document.createElement("p")// création des paragraphes
-    pColor.innerText = item.colors 
-    console.log(item.colors)
+    pColor.innerText = product.color
     const pPrice = document.createElement("p")
     pPrice.innerText = item.price + "€" // on implante le prix pour qu'il s'affiche dynamiquement à côté de €
     description.appendChild(h2)// on append les différents enfants à la div principale
@@ -141,6 +140,7 @@ async function totalCart() {
     }
     document.getElementById("totalQuantity").innerText = nb//on sélectionne les éléments HTML totalQuantity/totalPrice pour l'affichage du nombre d'article et du prix total
     document.getElementById("totalPrice").innerText = total
+    
 }
 // fonction qui va permettre d'actualiser en temps réel la quantité de canapés depuis le panier
 const updateQuantity = (productId, productColor, qty) => {
@@ -151,7 +151,11 @@ const updateQuantity = (productId, productColor, qty) => {
     )
     if (indexProduct != -1) {
         cart[indexProduct].quantity = parseInt(qty)
-        localStorage.setItem("Cart", JSON.stringify(cart))
+        if (cart.length == 0) {
+            localStorage.removeItem("Cart")
+        } else {
+            localStorage.setItem("Cart", JSON.stringify(cart))
+        }
         document.location.href = "cart.html"
     } else {
         return false;
@@ -159,16 +163,20 @@ const updateQuantity = (productId, productColor, qty) => {
 }
 
 
-// fonction qui permet d'intéragir avec le bouton supprimer pour qu'il efface des articles
+
 const deleteArticle = (productId, productColor) => {
-    if (!productId || !productColor)// on vérifie qu'aucun des paramètres ne manque
+    if (!productId || !productColor)
         return false;
     let indexProduct = cart.findIndex(
         (el) => el.id === productId && el.color == productColor
     )
     if (indexProduct != -1) {
         cart.splice(indexProduct, 1)
-        localStorage.setItem("Cart", JSON.stringify(cart))
+        if (cart.length == 0) {
+            localStorage.removeItem("Cart")
+        } else {
+            localStorage.setItem("Cart", JSON.stringify(cart))
+        }
         document.location.href = "cart.html"
     } else {
         return false;
@@ -177,7 +185,7 @@ const deleteArticle = (productId, productColor) => {
 
 
 
-// fonctions pour chaque élément du formulaire afin de vérifier la validité ce ceux-ci et prévenir l'utilisateur de saisir des données interdites par le REGEX
+// REGEX part for email and city
 function isEmailInvalid() {
     const email = document.querySelector("#email")
     const regex = /^[A-Za-z0-9+_.-]+@(.+)$/
@@ -230,13 +238,37 @@ function isLastnameInvalid() {
 
 }
 
-// fonction globale qui verifie chaque champ du fomulaire; si l'un des champs est invalide, une erreur est renvoyée.
-function isFormInvalid() {
+
+ async function isFormInvalid() {
     if (isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid()) {
         alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")
     }
-    //else fetch
-}
+    else {
+        let cart = JSON.parse(localStorage.getItem("Cart"))
+        let products = [];
+      
+        for ( let product of cart ) {
+            
+            products.push( product.id )
+        } 
+        if (products) {
+    
+            let datas = {
+                contact: {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    address: document.getElementById('address').value,
+                    city: document.getElementById('city').value,
+                    email: document.getElementById('email').value
+                },
+                products: products
+            }         
+            let order = await fetchAPI("http://localhost:3000/api/products/order", 'POST' , 'application/json' , datas )
+            if (order.orderId)
+                window.location.href = "confirmation.html" + "?orderId=" + order.orderId			
+        }   
+    }}
+    
 
 
 // window.location.href = "confirmation.html" + "?orderId=" + data.orderId ;
