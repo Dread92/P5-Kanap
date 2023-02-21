@@ -34,7 +34,7 @@ totalCart() // On appelle la fonction totalCart pour calculer le prix total du p
 
 
 // on utilise une fonction asynchrone pour fetch les produits de l'API
-async function displayItem(item) { // on prend item en argument qui contient l'id
+async function displayItem(item) { // on prend item en argument qui contient l'id afin que l'affichage soit fait dynamiquement selon les produits ajoutés au panier
     let sofa = await fetchAPI('http://localhost:3000/api/products/' + item.id, 'GET', 'application/json', false)
     const article = createArticle(item) // appel des deux fonctions item&sofa qui permettent d'afficher au bon endroit le contenu de la "carte" du canapé et son image
     const imageDiv = createImageInDiv(sofa)
@@ -55,55 +55,55 @@ function createCartContent(item, product) {
     cardItemContent.appendChild(settings)
     return cardItemContent
 }
-
+//fonnction qui crée une div settings(cart__item__content__settings) puis fait appel à addQuantitySettings et addDeleteSettings.
 function createSettings(item, product) {
     const settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
-    addQuantitySettings(settings, item, product)
-    addDeleteSettings(settings, product)
+    addQuantitySettings(settings, item, product)// permet de modifier la quantité
+    addDeleteSettings(settings, product)// permet d'ajouter le bouton supprimer
     return settings
 }
-
+// fonction qui permet d'ajouter une quantité comprise entre 1 & 100
 function addQuantitySettings(settings, item, product) {
-    const quantity = document.createElement("div")
+    const quantity = document.createElement("div")//on crée les éléments HTML
     quantity.classList.add("cart__item__content__settings__quantity")
     const p = document.createElement("p")
     p.textContent = " Qté :"
     quantity.appendChild(p)
-    const input = document.createElement("input")
-    input.type = "number"
+    const input = document.createElement("input") // on configure les inputs en type nombre, quantité min/max et on ajoute la classe ItemQuantity
+    input.type = "number" // input type important car il détermine qu'on a à faire à des nombres et pas des lettres
     input.classList.add("itemQuantity")
     input.name = "itemQuantity"
-    input.min = "1"
-    input.max = "100"
-    input.value = product.quantity
-    input.addEventListener('change', (e) => updateQuantity(product.id, product.color, input.value))
+    input.min = "1"// valeur minimale
+    input.max = "100"//valeur maximale
+    input.value = product.quantity // valeur par défaut = le nombre de produits séléctionnés par l'utilisateur
+    input.addEventListener('change', (e) => updateQuantity(product.id, product.color, input.value)) // on appelle la fonction updatequantity qui va permettre de rafraîchir la page en cas de changement de quantité
     // générer bouton supprimer ( deleteitem) + gestion du addeventlistener
     settings.appendChild(input)
 }
-
+// fonction qui permet de créer le bouton supprimer
 function addDeleteSettings(settings, product) {
-    const deleteButton = document.createElement("div");
-    deleteButton.className = "cart__item__content__settings__delete";
+    const deleteButton = document.createElement("div"); // on ajoute une div dans le HTML
+    deleteButton.className = "cart__item__content__settings__delete";// création de la classe dans le HTML et du paragraphe
     let deleteProduct = document.createElement("p");
     deleteButton.appendChild(deleteProduct);
     deleteProduct.className = "deleteItem";
     deleteProduct.innerHTML = "Supprimer";
-    deleteProduct.addEventListener('click', (e) => deleteArticle(product.id, product.color))
+    deleteProduct.addEventListener('click', (e) => deleteArticle(product.id, product.color))// ajout d'un addevenlistener qui va supprimer du l'id et la couleur du localstorage
     settings.appendChild(deleteButton);
 }
-
+// fonction qui va permettre de créer le contenu de la carte produit dans le panier 
 function createDescription(item) {
-    const description = document.createElement("div")
-    description.classList.add("cart__item__content__description")
-    const h2 = document.createElement("h2")
+    const description = document.createElement("div")// création de la div 
+    description.classList.add("cart__item__content__description")// création de la classe dans le HTML
+    const h2 = document.createElement("h2")// création du titre
     h2.textContent = item.name
-    const pColor = document.createElement("p")
-    pColor.innerText = item.colors
+    const pColor = document.createElement("p")// création des paragraphes
+    pColor.innerText = item.colors 
     console.log(item.colors)
     const pPrice = document.createElement("p")
-    pPrice.innerText = item.price + "€"
-    description.appendChild(h2)
+    pPrice.innerText = item.price + "€" // on implante le prix pour qu'il s'affiche dynamiquement à côté de €
+    description.appendChild(h2)// on append les différents enfants à la div principale
     description.appendChild(pColor)
     description.appendChild(pPrice)
     return description
@@ -112,21 +112,21 @@ function createDescription(item) {
 function displayArticle(article) { // on sélectionne cart__items dans le html puis création d'un enfant à qui on créé l'enfant article 
     document.querySelector("#cart__items").appendChild(article)
 }
-
+// fonction qui permet de créer l'article et d'ajouter cart__item
 function createArticle(item) {
     const article = document.createElement("article")
-    article.classList.add("cart__item")
-    article.dataset.id = item.id
+    article.classList.add("cart__item")// ajout de la classe cart__item
+    article.dataset.id = item.id// permet d'ajouter l'item en fonction de l'ID et de la couleur séléctionnée
     article.dataset.colors = item.colors
     return article
 }
-
+//fonction qui va permettre l'affichage de l'image du produit dans le panier
 function createImageInDiv(item) {
-    const div = document.createElement("div")
-    div.classList.add("cart__item__img")
-    const image = document.createElement('img')
-    image.src = item.imageUrl
-    image.alt = item.altTxt
+    const div = document.createElement("div")// création de la div dans le HTML
+    div.classList.add("cart__item__img")// création de la classe dans la div
+    const image = document.createElement('img') // création de l'élément image 
+    image.src = item.imageUrl // on prend l'url de l'image en fonction du produit qui doit être affiché
+    image.alt = item.altTxt // texte en fonction du produit
     div.appendChild(image)
     return div
 }
