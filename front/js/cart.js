@@ -187,8 +187,8 @@ const deleteArticle = (productId, productColor) => {
 
 // REGEX part for email and city
 function isEmailInvalid() {
-    const email = document.querySelector("#email")
-    const regex = /^[A-Za-z0-9+_.-]+@(.+)$/
+    const email = document.querySelector("#email").value
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     if (regex.test(email) === false) {
         alert("Entrez une adresse mail valide")
         return true
@@ -197,7 +197,7 @@ function isEmailInvalid() {
 }
 
 function isCityInvalid() {
-    const city = document.querySelector("#city")
+    const city = document.querySelector("#city").value
     const cityRegex = /^(?![\s.]+$)[A-zÀ-ú\s\-']{1,25}$/
     if (cityRegex.test(city) === false) {
         alert("Entrez un nom de ville valide")
@@ -207,8 +207,8 @@ function isCityInvalid() {
 }
 
 function isAddressInvalid() {
-    const address = document.querySelector("#address")
-    const addressRegex = /d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*/
+    const address = document.querySelector("#address").value
+    const addressRegex = /^[0-9]{1,5}\s+[A-Za-zéèàïêç\-\s]{2,50}$/
     if (addressRegex.test(address) === false) {
         alert("Entrez une adresse postale valide")
         return true
@@ -217,10 +217,10 @@ function isAddressInvalid() {
 }
 
 function isFirstNameInvalid() {
-    const firstName = document.querySelector("#firstName")
-    const firstNameRegex = /^[a-z ,.'-]+$/i
+    const firstName = document.querySelector("#firstName").value
+    const firstNameRegex = /^[a-zA-Zàâäéèêëïîôöùûüÿç-]+$/i
     if (firstNameRegex.test(firstName) === false) {
-        alert("Entrez un prénom valide")
+        alert("Entrez un nom valide")
         return true
     }
     return false
@@ -228,8 +228,8 @@ function isFirstNameInvalid() {
 
 
 function isLastnameInvalid() {
-    const lastName = document.querySelector("#lastName")
-    const lastNameRegex = /^[a-z ,.'-]+$/i
+    const lastName = document.querySelector("#lastName").value
+    const lastNameRegex = /^[a-zA-Zàâäéèêëïîôöùûüÿç-]+$/i
     if (lastNameRegex.test(lastName) === false) {
         alert("Entrez un prénom valide")
         return true
@@ -237,6 +237,8 @@ function isLastnameInvalid() {
     return false
 
 }
+
+
 
 async function postAPI() {
 
@@ -279,8 +281,7 @@ document.getElementById('order').addEventListener("click", (e) => {
   
     if (isFormInvalid()) {
 
-        alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")        
-        return
+        return false
 
     } else {
 
@@ -290,3 +291,5 @@ document.getElementById('order').addEventListener("click", (e) => {
 
     return false
 })
+
+// window.location.href = "confirmation.html" + "?orderId=" + data.orderId ;
