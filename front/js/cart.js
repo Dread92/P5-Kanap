@@ -238,37 +238,55 @@ function isLastnameInvalid() {
 
 }
 
+async function postAPI() {
 
- async function isFormInvalid() {
+    let cart = JSON.parse(localStorage.getItem("Cart"))
+    let products = [];
+  
+    for ( let product of cart ) {
+        
+        products.push( product.id )
+    } 
+    if (products) {
+
+        let datas = {
+            contact: {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                email: document.getElementById('email').value
+            },
+            products: products
+        }         
+        let order = await fetchAPI("http://localhost:3000/api/products/order", 'POST' , 'application/json' , datas )
+        if (order.orderId)
+            window.location.href = "confirmation.html" + "?orderId=" + order.orderId            
+    } 
+
+}
+
+ function isFormInvalid() {
     if (isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid()) {
-        alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")
+        return true
     }
-    else {
-        let cart = JSON.parse(localStorage.getItem("Cart"))
-        let products = [];
-      
-        for ( let product of cart ) {
-            
-            products.push( product.id )
-        } 
-        if (products) {
+    return false
+}
     
-            let datas = {
-                contact: {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    address: document.getElementById('address').value,
-                    city: document.getElementById('city').value,
-                    email: document.getElementById('email').value
-                },
-                products: products
-            }         
-            let order = await fetchAPI("http://localhost:3000/api/products/order", 'POST' , 'application/json' , datas )
-            if (order.orderId)
-                window.location.href = "confirmation.html" + "?orderId=" + order.orderId			
-        }   
-    }}
-    
+document.getElementById('order').addEventListener("click", (e) => {
 
+    e.preventDefault()
+  
+    if (isFormInvalid()) {
 
-// window.location.href = "confirmation.html" + "?orderId=" + data.orderId ;
+        alert("Votre adresse email,votre adresse postale ou votre nom/prénom est invalide")        
+        return
+
+    } else {
+
+        postAPI()
+
+    }
+
+    return false
+})
