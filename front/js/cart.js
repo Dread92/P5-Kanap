@@ -130,21 +130,21 @@ function createImageInDiv(item) {
     div.appendChild(image)
     return div
 }
-
+// fonction asynchrone pour calculer la totalité du panier
 async function totalCart() {
-    let nb = 0
+    let nb = 0// on définit les deux variables nombre/total à 0 de base
     let total = 0
-    for (let product of cart) {
-        let datasProduct = await fetchAPI('http://localhost:3000/api/products/' + product.id, 'GET', 'application/json', false)
-        nb += parseInt(product.quantity)
-        total += (parseInt(product.quantity) * parseInt(datasProduct.price))
+    for (let product of cart) {// on créé ensuite une boucle qui va itérer sur chaque produit du panier
+        let datasProduct = await fetchAPI('http://localhost:3000/api/products/' + product.id, 'GET', 'application/json', false)// pour chaque produit, on appelle l'API par l'id du produit afin de récuperer le prix
+        nb += parseInt(product.quantity) // on ajoute la quantité à la variable nb
+        total += (parseInt(product.quantity) * parseInt(datasProduct.price))// puis on multiplie le nb(nombre)par le prix pour avoir le total
     }
-    document.getElementById("totalQuantity").innerText = nb
+    document.getElementById("totalQuantity").innerText = nb//on sélectionne les éléments HTML totalQuantity/totalPrice pour l'affichage du nombre d'article et du prix total
     document.getElementById("totalPrice").innerText = total
 }
-
+// fonction qui va permettre d'actualiser en temps réel la quantité de canapés depuis le panier
 const updateQuantity = (productId, productColor, qty) => {
-    if (!productId || !productColor || !qty)
+    if (!productId || !productColor || !qty)// on vérifie qu'aucun des paramètres ne manque
         return false;
     let indexProduct = cart.findIndex(
         (el) => el.id === productId && el.color == productColor
