@@ -151,11 +151,7 @@ const updateQuantity = (productId, productColor, qty) => {
     )
     if (indexProduct != -1) {
         cart[indexProduct].quantity = parseInt(qty)
-        if (cart.length == 0) {
-            localStorage.removeItem("Cart")
-        } else {
-            localStorage.setItem("Cart", JSON.stringify(cart))
-        }
+        localStorage.setItem("Cart", JSON.stringify(cart))
         document.location.href = "cart.html"
     } else {
         return false;
@@ -172,11 +168,7 @@ const deleteArticle = (productId, productColor) => {
     )
     if (indexProduct != -1) {
         cart.splice(indexProduct, 1)
-        if (cart.length == 0) {
-            localStorage.removeItem("Cart")
-        } else {
-            localStorage.setItem("Cart", JSON.stringify(cart))
-        }
+        localStorage.setItem("Cart", JSON.stringify(cart))
         document.location.href = "cart.html"
     } else {
         return false;
