@@ -51,6 +51,10 @@ function showProducts(datas) {
 }
 
 
+/////////////////////////////////
+// Création des éléments HTML // 
+///////////////////////////////
+
 // Avec id en argument, on crée une balise <a> qui renvoi à  ./product.html?id= + l'id du produit souhaité
 function makeLink(id) {
     const link = document.createElement('a')
