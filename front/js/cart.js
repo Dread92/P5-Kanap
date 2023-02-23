@@ -32,10 +32,6 @@ cart.forEach(item => displayItem(item)) // on fait une boucle sur l'array du loc
 totalCart() // On appelle la fonction totalCart pour calculer le prix total du panier
 
 
-///////////////////////////////
-//Création des éléments HTML//
-/////////////////////////////
-
 
 // on utilise une fonction asynchrone pour fetch les produits de l'API
 async function displayItem(item) { // on prend item en argument qui contient l'id afin que l'affichage soit fait dynamiquement selon les produits ajoutés au panier
@@ -47,6 +43,11 @@ async function displayItem(item) { // on prend item en argument qui contient l'i
     article.appendChild(cardItemContent)
     displayArticle(article) // on appelle la fonction display article    
 }
+
+///////////////////////////////
+//Création des éléments HTML//
+/////////////////////////////
+
 
 
 // fonction qui permet de crée cart__item__content dans lequel on créé "description" et "settings"
