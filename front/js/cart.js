@@ -32,6 +32,10 @@ cart.forEach(item => displayItem(item)) // on fait une boucle sur l'array du loc
 totalCart() // On appelle la fonction totalCart pour calculer le prix total du panier
 
 
+///////////////////////////////
+//Création des éléments HTML//
+/////////////////////////////
+
 
 // on utilise une fonction asynchrone pour fetch les produits de l'API
 async function displayItem(item) { // on prend item en argument qui contient l'id afin que l'affichage soit fait dynamiquement selon les produits ajoutés au panier
@@ -129,6 +133,12 @@ function createImageInDiv(item) {
     div.appendChild(image)
     return div
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Création des éléments dynamiques (total du panier, mis à jour des quantités, suppression d'un article)//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 // fonction asynchrone pour calculer la totalité du panier
 async function totalCart() {
     let nb = 0// on définit les deux variables nombre/total à 0 de base
@@ -144,45 +154,48 @@ async function totalCart() {
 }
 // fonction qui va permettre d'actualiser en temps réel la quantité de canapés depuis le panier
 const updateQuantity = (productId, productColor, qty) => {
-    if (!productId || !productColor || !qty)// on vérifie qu'aucun des paramètres ne manque
-        return false;
+    if (!productId || !productColor || !qty)// on vérifie qu'aucun des paramètres de la fonction ne manque
+        return false;// sinon on retourne faux
     let indexProduct = cart.findIndex(
-        (el) => el.id === productId && el.color == productColor
+        (el) => el.id === productId && el.color == productColor// on recherche dans l'array le produit spécifié par id & color
     )
-    if (indexProduct != -1) {
+    if (indexProduct != -1) {// si un " match" est trouvé, on met à jour la quantité (qty) et on met à jour le LocalStorage
         cart[indexProduct].quantity = parseInt(qty)
         localStorage.setItem("Cart", JSON.stringify(cart))
-        document.location.href = "cart.html"
+        document.location.href = "cart.html"// enfin, on redirige vers cart.html
     } else {
         return false;
     }
 }
 
 
-
+// fonction qui va permettre de supprimer un article
 const deleteArticle = (productId, productColor) => {
-    if (!productId || !productColor)
+    if (!productId || !productColor)// on vérifie que les paramètres productId et productColor de la fonction ne sont pas vides
         return false;
-    let indexProduct = cart.findIndex(
+    let indexProduct = cart.findIndex(// on cherche dans le cart si le produit avec la couleur et l'id donnés existent
         (el) => el.id === productId && el.color == productColor
     )
-    if (indexProduct != -1) {
+    if (indexProduct != -1) {// si ça existe, on supprime du LocalStorage avec un nouvel array vide puis redirection vers la page cart.html
         cart.splice(indexProduct, 1)
         localStorage.setItem("Cart", JSON.stringify(cart))
         document.location.href = "cart.html"
     } else {
-        return false;
+        return false;// si le produit n'est pas trouvé, on retourne false.
     }
 }
 
 
+//////////////////////////////////////////////////////////////////
+// Création des REGEX (regular expression) pour contrôler la validité du formulaire // 
+////////////////////////////////////////////////////////////////
 
-// REGEX part for email and city
+// grâce à cet ensemble de fonction, on peut contrôler chaque ligne du formulaire pour déterminer la validité du user input.
 function isEmailInvalid() {
     const email = document.querySelector("#email").value
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     if (regex.test(email) === false) {
-        alert("Entrez une adresse mail valide")
+        alert("Entrez une adresse mail valide") //Si la regex n'est pas correctement respectée, une alerte est renvoyée.
         return true
     }
     return false
@@ -230,20 +243,29 @@ function isLastnameInvalid() {
 
 }
 
+// fonction qui va déterminer si le formulaire est valide en contrôlant chacune des REGEX des fonctions ci dessous.
+function isFormInvalid() {
+    if (isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid()) {
+        return true
+    }
+    return false
+}
+    
 
+// fonction asynchrone qui va envoyer des données à l'API
 
 async function postAPI() {
 
-    let cart = JSON.parse(localStorage.getItem("Cart"))
-    let products = [];
-  
+    let cart = JSON.parse(localStorage.getItem("Cart"))// on prend les éléments présent dans Cart du LocalStorage
+    let products = [];// puis on les met dans un array
+ 
     for ( let product of cart ) {
         
         products.push( product.id )
     } 
-    if (products) {
+    if (products) {// on crée un objet contenant les informations du formulaire + la liste de produit 
 
-        let datas = {
+        let datas = {// les données envoyer sont l'ensemble des données saisies par l'utilisateur dans le formulaire
             contact: {
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
@@ -253,20 +275,16 @@ async function postAPI() {
             },
             products: products
         }         
+        // ils sont ensuites envoyés à l API avec la méthode POST 
         let order = await fetchAPI("http://localhost:3000/api/products/order", 'POST' , 'application/json' , datas )
-        if (order.orderId)
+        if (order.orderId)// l'API répond ensuite grâce à un orderId qui va rediriger l'utilisateur vers la page de confirmation et générer un numéro de commande
             window.location.href = "confirmation.html" + "?orderId=" + order.orderId            
     } 
 
 }
 
- function isFormInvalid() {
-    if (isCityInvalid() || isEmailInvalid() || isAddressInvalid() || isFirstNameInvalid() || isLastnameInvalid()) {
-        return true
-    }
-    return false
-}
-    
+
+// Fonction qui met un addeventlistener sur "order" et qui va au clic vérifier si le formulaire est valide; si il l'est on appelle la fonction au dessus pour récupérer le formulaire et les produits puis renvoi vers confirmation.html
 document.getElementById('order').addEventListener("click", (e) => {
 
     e.preventDefault()
@@ -284,4 +302,4 @@ document.getElementById('order').addEventListener("click", (e) => {
     return false
 })
 
-// window.location.href = "confirmation.html" + "?orderId=" + data.orderId ;
+
