@@ -4,7 +4,7 @@ document.title = ` Votre Panier`
 const cart = JSON.parse(localStorage.getItem("Cart"));
 // on fait appel à l'API via une requête fetch, en utilisant une méthode flexible POST/GET grâce à la variable "options"
 const fetchAPI = (url, method, type, datas) => {
-
+                
     let options = {
         method: method,
         headers: {
@@ -223,7 +223,7 @@ function isAddressInvalid() {
 }
 
 function isFirstNameInvalid() {
-    const firstName = document.querySelector("#firstName").value
+    const firstName = document.querySelector("#lastName").value
     const firstNameRegex = /^[a-zA-Zàâäéèêëïîôöùûüÿç-]+$/i
     if (firstNameRegex.test(firstName) === false) {
         alert("Entrez un nom valide")
@@ -234,7 +234,7 @@ function isFirstNameInvalid() {
 
 
 function isLastnameInvalid() {
-    const lastName = document.querySelector("#lastName").value
+    const lastName = document.querySelector("#firstName").value
     const lastNameRegex = /^[a-zA-Zàâäéèêëïîôöùûüÿç-]+$/i
     if (lastNameRegex.test(lastName) === false) {
         alert("Entrez un prénom valide")
