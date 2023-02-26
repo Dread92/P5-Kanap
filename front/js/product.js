@@ -144,7 +144,7 @@ document.querySelector('#addToCart').addEventListener("click", (e) => {
 
 //Cette fonction sert à déterminer si tous les paramètres avant l'ajout au panier sont corrects ( couleur sélectionnée, quantité entre 1 et 100/non nulle)
 function choices(colors, quantity) {
-    if (colors == null || colors == "" || quantity == null || quantity == 0 || quantity <= 0 || quantity > 100)
+    if (colors == null || colors == "" || quantity == null || quantity == 0 || quantity <= 0 || quantity > 100 || quantity % 1 !== 0 )
         return false
     return true
 }
