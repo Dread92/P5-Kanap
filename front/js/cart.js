@@ -155,8 +155,9 @@ async function totalCart() {
 }
 // fonction qui va permettre d'actualiser en temps réel la quantité de canapés depuis le panier
 const updateQuantity = (productId, productColor, qty) => {
-    if (!productId || !productColor || !qty)// on vérifie qu'aucun des paramètres de la fonction ne manque
-        return false;// sinon on retourne faux
+    if (!productId || !productColor || !qty || qty < 1 || qty > 100|| qty % 1 !== 0){// on vérifie qu'aucun des paramètres de la fonction ne manque
+    alert("La quantité doit être comprise entre 1 et 100")
+        return false;}// sinon on retourne faux
     let indexProduct = cart.findIndex(
         (el) => el.id === productId && el.color == productColor// on recherche dans l'array le produit spécifié par id & color
     )
