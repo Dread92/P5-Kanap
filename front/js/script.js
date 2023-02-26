@@ -29,26 +29,26 @@ _id:"107fb5b75607497b96722bda5b504926" */
 //Fonction globale d'affichage des produits via "data"
 function showProducts(datas) {
     if (!datas) return;
-    for (let i = 0; i < datas.length; i++) { // boucle qui parcourt le tableau de produits
-        //Pour chaque produit, on récupète les différentes données inhérentes à celui ci via des constantes
-        const id = datas[i]._id
-        const imageUrl = datas[i].imageUrl
-        const altTxt = datas[i].altTxt
-        const name = datas[i].name
-        const description = datas[i].description
+    datas.forEach((data) => {
+        const id = data._id
+        const imageUrl = data.imageUrl
+        const altTxt = data.altTxt
+        const name = data.name
+        const description = data.description
         const link = makeLink(id)
-        // Puis on crée les éléments HTML nécessaires pour afficher les informations du produit 
+        
         const article = document.createElement('article')
         const image = createImage(imageUrl, altTxt)
         const h3 = createTitle(name)
         const p = createParagraph(description)
-        /* création d'enfants à <article> */
+        
         article.appendChild(image)
         article.appendChild(h3)
         article.appendChild(p)
         appendArticleToLink(link, article)
-    }
+    });
 }
+
 
 
 /////////////////////////////////
